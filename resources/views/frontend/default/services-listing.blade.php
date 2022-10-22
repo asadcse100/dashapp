@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 @endif
-                    <div class="row gutters-10 mt-5">
+                    <div class="row gutters-10 mt-3">
                         <div class="col-xl-3 col-lg-4">
                             <div class="aiz-filter-sidebar collapse-sidebar-wrap sidebar-lg">
                                 <div class="card rounded-0 rounded-lg collapse-sidebar c-scrollbar-light">
@@ -26,97 +26,98 @@
                                         </h6>
                                             <div class="list-group">
                                                 @php
-                                                    $product_categories = App\Models\ProductCategory::where('status',1)->get();
+                                                    $product_categories = App\Models\ProductCategory::where('status',1)->orderby('order_by')->get();
+
                                                 @endphp
                                                 @if(!empty($product_categories))
                                                 @foreach ($product_categories as $category)
                                                 <a href="{{ Route('filter_category', $category->id) }}"
                                                     class="list-group-item list-group-item-action">{{ $category->name }}</a>
-                                                @endforeach
-                                                @endif
-                                            </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="overlay overlay-fixed dark c-pointer" data-toggle="class-toggle"
-                                    data-target=".aiz-filter-sidebar" data-same=".filter-sidebar-thumb"></div>
                             </div>
+                            <div class="overlay overlay-fixed dark c-pointer" data-toggle="class-toggle"
+                                data-target=".aiz-filter-sidebar" data-same=".filter-sidebar-thumb"></div>
                         </div>
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="">
-                                <input type="hidden" name="type" value="freelancer">
-                                <div class="card-header">
-                                    {{-- <div class="d-flex align-items-center">
+                    </div>
+                    <div class="col-xl-9 col-lg-8 mt-1">
+                        <div class="">
+                            <input type="hidden" name="type" value="freelancer">
+                            {{-- <div class="card-header">
+                                <div class="d-flex align-items-center">
                                     <button class="btn btn-sm btn-icon btn-soft-secondary d-lg-none flex-shrink-0 mr-2"
                                         data-toggle="class-toggle" data-target=".aiz-filter-sidebar" type="button">
                                         <i class="las la-filter"></i>
                                     </button>
                                     <input type="text" class="form-control form-control-sm" placeholder="Search Keyword"
                                         name="keyword" value="{{ $keyword }}">
-                                </div> --}}
                                 </div>
-                                <div class="row gutters-10">
-                                    <div class="card-body p-0">
-                                        <div class="faq container">
-                                            <div class="row">
-                                                @foreach ($services as $service)
-                                                    <div class="col-sm-4 mb-4">
-                                                        <div class="card">
-                                                            <a href="{{ route('service.show', $service->slug) }}">
-                                                                @if (!empty($service->image))
-                                                                    <img src="{{ asset('storage/uploads/services/' . $service->image) }}"
-                                                                        class="card-img-top" height="200"
-                                                                        alt="{{ asset($service->slug) }}">
+                            </div> --}}
+                            <div class="row gutters-10">
+                                <div class="card-body p-0">
+                                    <div class="faq container">
+                                        <div class="row">
+
+                                            @foreach ($services as $service)
+                                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+                                                    <div class="card">
+                                                        <a href="{{ route('service.show', $service->slug) }}">
+                                                            @if (!empty($service->image))
+                                                                <img src="{{ asset('storage/uploads/services/' . $service->image) }}"
+                                                                    class="card-img-top" height="140"
+                                                                    alt="{{ asset($service->slug) }}">
+                                                            @else
+                                                                <img src="{{ asset('templete') }}/src/assets/img/dummy-post-horisontal.jpg"
+                                                                    alt="Team Image" style="height: 140px;">
+                                                            @endif
+                                                        </a>
+
+
+
+                                                        <div class="card-body">
+
+                                                            <div class="media mt-1 mb-0 pt-1">
+                                                                @if (!empty($service->user->photo))
+                                                                    <img src="{{ asset('profile/photos/' . $service->user->photo) }}"
+                                                                        class="card-media-image me-3"
+                                                                        alt="{{ $service->user->photo }}" style="height: 30px; width:30px">
                                                                 @else
-                                                                    <img src="{{ asset('templete') }}/src/assets/img/dummy-post-horisontal.jpg"
-                                                                        alt="Team Image"
-                                                                        style="height: 200px; width:200px;">
+                                                                    <img src="{{ asset('assets/frontend/default/img/avatar-place.png') }}"
+                                                                        class="card-media-image me-3" style="height: 30px; width:30px">
                                                                 @endif
-                                                            </a>
-
-
-
-                                                            <div class="card-body">
-
-                                                                <div class="media mt-4 mb-0 pt-1">
-                                                                    @if (!empty(Auth::user()->photo))
-                                                                        <img src="{{ asset('profile/photos/' . Auth::user()->photo) }}"
-                                                                            class="card-media-image me-3"
-                                                                            alt="{{ Auth::user()->photo }}">
-                                                                    @else
-                                                                        <img src="{{ asset('assets/frontend/default/img/avatar-place.png') }}"
-                                                                            class="card-media-image me-3" alt="">
-                                                                    @endif
-                                                                    <a
-                                                                        href="{{ route('freelancer.details', $service->user->user_name) }}">
-                                                                        <div class="media-body">
-                                                                            <h4 class="media-heading mt-3">
-                                                                                {{ $service->user->name }}</h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                <h5 class="card-title"> <a
-                                                                        href="{{ route('freelancer.details', $service->user->user_name) }}"
-                                                                        class="text-dark"></a>
-                                                                </h5>
-                                                                <hr>
-                                                                <a href="{{ route('service.show', $service->slug) }}"
-                                                                    class="text-dark">
-                                                                    <h5 class="card-title">
-                                                                        {{ \Illuminate\Support\Str::limit($service->title, 40, $end = '...') }}
-                                                                    </h5>
+                                                                <a
+                                                                    href="{{ route('freelancer.details', $service->user->user_name) }}">
+                                                                    <div class="media-body">
+                                                                        <h4 class="media-heading mt-1">
+                                                                            {{ $service->user->name }}</h4>
+                                                                    </div>
                                                                 </a>
                                                             </div>
+                                                            <p class="card-footer"> <a
+                                                                    href="{{ route('freelancer.details', $service->user->user_name) }}"
+                                                                    class="text-dark"></a>
+                                                            </p>
+                                                           
+                                                            <a href="{{ route('service.show', $service->slug) }}"
+                                                                class="text-dark">
+                                                                <p class="card-title">
+                                                                    {{ \Illuminate\Support\Str::limit($service->title, 40, $end = '...') }}
+                                                                </p>
+                                                            </a>
                                                         </div>
                                                     </div>
-                                                @endforeach
-                                            </div>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 

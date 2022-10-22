@@ -41,11 +41,18 @@ class ServicesUtility
         $service_package = new ServicePackage();
 
         // $fileName = Str::slug(Str::words($request->about_service, 2), '-').rand(100, 5).'.'.$request->service_photo->extension();
-        $fileName = time().'.'.$request->service_photo->extension();
-        $request->service_photo->storeAs('public/uploads/services', $fileName);
+        // $fileName = time().'.'.$request->service_photo->extension();
+        // $request->service_photo->storeAs('public/uploads/services', $fileName);
 
         $service->title = $request->title;
-        $service->image = $fileName;
+        // $service->image = $fileName;
+
+        if ($request->service_photo != null) {
+            $fileName = time().'.'.$request->service_photo->extension();
+            // $request->service_photo->move(public_path('service-images/'), $fileName);
+            $request->service_photo->storeAs('public/uploads/services', $fileName);
+            $service->image = $fileName;
+        }
         $service->about_service = $request->about_service;
         $service->product_category_id = $request->category_id;
         $service->product_service_id = $request->sub_category_id;
@@ -80,31 +87,50 @@ class ServicesUtility
    {
         $service = Service::where('slug', $slug)->first();
         $service_packages = $service->service_packages;
+        $package_count = $service_packages->count();
 
         $service->title = $request->title;
 
-        $fileName = time().'.'.$request->service_photo->extension();
-        $request->service_photo->storeAs('public/uploads/services', $fileName);
+        // $fileName = time().'.'.$request->service_photo->extension();
+        // $request->service_photo->storeAs('public/uploads/services', $fileName);
 
         // $service->image = $request->service_photo;
-        $service->image = $fileName;
+        // $service->image = $fileName;
+
+        if (!empty($request->service_photo)) {
+            $fileName = time().'.'.$request->service_photo->extension();
+            // $request->service_photo->move(public_path('service-images/'), $fileName);
+            $request->service_photo->storeAs('public/uploads/services', $fileName);
+            $service->image = $fileName;
+        }
         $service->about_service = $request->about_service;
         $service->project_cat_id = $request->category_id;
+        $service->product_service_id = $request->sub_category_id;
         $service->user_id = Auth::user()->id;
         if ($service->slug == null) {
-            $service->slug = Str::slug($request->title, '-').date('Ymd-his');
+            $service->slug = Str::slug($request->title, '-');
         }
         $counter = 0;
         $requested_service_packages = ServicesUtility::make_package_array($request);
 
         if($service->save()) {
+
             foreach($requested_service_packages as $key => $service_package) {
-                $new_package = $service_packages[$counter++];
-                $new_package->service_type = $key;
-                foreach($service_package as $key => $service_package_details) {
-                    $new_package->$key = $service_package[$key];
+
+                if($counter < $package_count){
+                    $new_package = $service_packages[$counter++];
+                }else{
+                    $new_package = new ServicePackage();
                 }
+                
+                $new_package->service_price = $service_package['service_price'];
+                    $new_package->delivery_time = $service_package['delivery_time'];
+                    $new_package->revision_limit = $service_package['revision_limit'];
+                    $new_package->feature_description = $service_package['feature_description'];
+
+                $new_package->service_type = $key;
                 $new_package->service_id = $service->id;
+                // dd($service_package, $new_package, $key, $new_package->service_id, $counter);
                 $new_package->save();
             }
             return 1;
@@ -140,3 +166,4 @@ class ServicesUtility
         return 0;
     }
 }
+

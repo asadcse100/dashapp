@@ -23,11 +23,12 @@ class ReferralController extends Controller
         $data = [];
         $data['refers'] = Referral::with('referred')->where('refer_by', auth()->user()->id)->get();
         $transactionsQuery = Transaction::where('type', 'referral')->where('user_id', auth()->user()->id)->orderBy('id', 'desc');
-        $bonusReceivedCollection = $transactionsQuery->get()->where('status', 1);
 
-        $data['earnings'] = $bonusReceivedCollection->mapToGroups(function ($item, $key) {
-            return [data_get($item->meta, 'referral.user') => $item->amount];
-        })->all();
+        $bonusReceivedCollection = $transactionsQuery->get()->where('status', 2);
+
+        // $data['earnings'] = $bonusReceivedCollection->mapToGroups(function ($item, $key) {
+        //     return [data_get($item->user_id, 'referral.user') => $item->amount];
+        // })->all();
 
         $data['bonusReceived'] = $bonusReceivedCollection->sum('amount');
         $data['bonusPending'] = $transactionsQuery->get()->where('status', 'pending')->sum('amount');

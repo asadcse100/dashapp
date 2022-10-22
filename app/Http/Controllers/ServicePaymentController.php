@@ -9,6 +9,7 @@ use App\Models\ChatThread;
 use App\Models\ServicePackagePayment;
 use App\Models\UserProfile;
 use App\Models\SystemConfiguration;
+use App\Models\Translations_log;
 use Session;
 
 class ServicePaymentController extends Controller
@@ -72,13 +73,14 @@ class ServicePaymentController extends Controller
         }
 
         $admin_profit = $service_package_payment->admin_profit;
-
         $service_package_payment->freelancer_profit = $translations_log->amount - $service_package_payment->admin_profit;
         $userProfile->balance += $service_package_payment->freelancer_profit;
-
         $service_package_payment->payment_details = "Success";
 
+        // dd($service_package_payment->save());
+
         if($service_package_payment->save()) {
+            // dd($service_package_payment);
             if($userProfile->save()) {
                 $existing_chat_thread = ChatThread::where('sender_user_id', $translations_log->user_id)->where('receiver_user_id', $service_package->service->user->id)->first();
                 if ($existing_chat_thread == null) {
@@ -90,11 +92,7 @@ class ServicePaymentController extends Controller
                 }
             }
 
-            // flash('Payment has been done successfully')->success();
-        } else {
-            // flash('The payment was done without saving the info.')->error();
-        }
-        $refer_user = Auth::user()->refer;
+            $refer_user = Auth::user()->refer;
 
         if(!empty($refer_user)){
             $referral_setting = SystemConfiguration::where('type','referral')->first();
@@ -126,10 +124,20 @@ class ServicePaymentController extends Controller
                     'status' => 2
                 ]
             );
+            return;
+            // return back();
         }
-        // Session::forget('payment_data');
 
-        return redirect()->route('dashboard');
+
+            // flash('Payment has been done successfully')->success();
+        } else {
+            // flash('The payment was done without saving the info.')->error();
+        }
+
+        // Session::forget('payment_data');
+        // dd($service_package_id, $mer_txnid);
+        return;
+        // return back();
     }
 
     public function service_package_payment_done($payment_data, $payment)

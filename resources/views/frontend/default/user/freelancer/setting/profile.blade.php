@@ -224,8 +224,8 @@
 
                                                             {{-- <div class="profile-image mt-4 pe-md-4"> --}}
                                                             <!-- // The classic file input element we'll enhance
-                                                                                                                      // to a file pond, we moved the configuration
-                                                                                                                      // properties to JavaScript -->
+                                                                                                                                                                                                                                                                                              // to a file pond, we moved the configuration
+                                                                                                                                                                                                                                                                                              // properties to JavaScript -->
                                                             {{-- <p class="text-center">Profile Photo</p>
                                                                 <div class="img-uploader-content">
                                                                 <input
@@ -399,37 +399,35 @@
                                         <div class="info">
                                             <h5 class="">Address</h5>
                                             <div class="row">
-                                                 <div class="col-md-11 mx-auto">
-                                                     <div class="row">
+                                                <div class="col-md-11 mx-auto">
+                                                    <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Address</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="village"
-                                                                    placeholder="Enter your street address"
-                                                                    required aria-describedby="nameLabel" value="@if(!empty($address->village)) {{ $address->village }} @endif">
+                                                                <input type="text" class="form-control" name="village"
+                                                                    placeholder="Enter your street address" required
+                                                                    aria-describedby="nameLabel"
+                                                                    value="@if (!empty($address->village)) {{ $address->village }} @endif">
                                                             </div>
                                                         </div>
 
-                                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ Auth::user()->id }}">
 
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="country">Country</label>
-                                                                <select class="form-select mb-3"
-                                                                    id="country_id" name="country_id"
-                                                                    data-live-search="true" required
+                                                                <select class="form-select mb-3" id="country_id"
+                                                                    name="country_id" data-live-search="true" required
                                                                     data-msg="Please select your country.">
                                                                     @foreach (\App\Models\Country::all() as $key => $country)
                                                                         @if (!empty($address->country_id))
-                                                                            <option
-                                                                                value="{{ $country->id }}"
+                                                                            <option value="{{ $country->id }}"
                                                                                 @if ($address->country_id == $country->id) selected @endif>
                                                                                 {{ $country->name }}
                                                                             </option>
                                                                         @else
-                                                                            <option
-                                                                                value="{{ $country->id }}">
+                                                                            <option value="{{ $country->id }}">
                                                                                 {{ $country->name }}
                                                                             </option>
                                                                         @endif
@@ -441,17 +439,15 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="city">City</label>
-                                                                <select class="form-select mb-3"
-                                                                    name="city_id" id="city_id"
-                                                                    data-live-search="true" required>
+                                                                <select class="form-select mb-3" name="city_id"
+                                                                    id="city_id" data-live-search="true" required>
                                                                     @foreach (\App\Models\City::all() as $key => $city)
-                                                                    @if (!empty($address->city_id))
-                                                                    <option
-                                                                        value="{{ $city->id }}"
-                                                                        @if ($address->city_id == $city->id) selected @endif>
-                                                                        {{ $city->name }}
-                                                                    </option>
-                                                                    @endif
+                                                                        @if (!empty($address->city_id))
+                                                                            <option value="{{ $city->id }}"
+                                                                                @if ($address->city_id == $city->id) selected @endif>
+                                                                                {{ $city->name }}
+                                                                            </option>
+                                                                        @endif
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -461,20 +457,19 @@
                                                             <div class="form-group">
                                                                 <label>Postal
                                                                     Code</label>
-                                                                <input type="text" id="postal_code"
-                                                                    name="postal_code"
+                                                                <input type="number" id="postal_code" name="postal_code"
                                                                     @if (!empty($address->postal_code)) value="{{ $address->postal_code }}" @endif
-                                                                    placeholder="('Eg. 1203')"
-                                                                    class="form-control">
+                                                                    placeholder="('Eg. 1203')" class="form-control">
                                                             </div>
                                                         </div>
 
-                                                    <div class="col-md-12 mt-1">
-                                                        <div class="form-group text-end">
-                                                            <button type="submit" class="btn btn-secondary">Save</button>
+                                                        <div class="col-md-12 mt-1">
+                                                            <div class="form-group text-end">
+                                                                <button type="submit"
+                                                                    class="btn btn-secondary">Save</button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 </div>
 
                                             </div>
@@ -633,8 +628,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Gender</label>
-                                                        <select class="form-select mb-3"
-                                                            name="gender" required
+                                                        <select class="form-select mb-3" name="gender" required
                                                             data-minimum-results-for-search="Infinity"
                                                             data-msg="Please select your gender."
                                                             data-error-class="u-has-error"
@@ -655,9 +649,11 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="country">Skill</label>
-                                                        <input name='skills' value='@if(!empty($user_profile->skills)) @foreach (json_decode($user_profile->skills) as $sk){{ $sk->name.',' }}@endforeach @endif'>
+                                                        <input name='skills'
+                                                            value='@if (!empty($user_profile->skills)) @foreach (json_decode($user_profile->skills) as $sk){{ $sk->name . ',' }}@endforeach @endif'>
                                                         @php
                                                             $to_json = \App\Models\Skill::select('id as value', 'name')
+                                                                ->where('category_id', $user_profile->professional_type_id)
                                                                 ->get()
                                                                 ->toJson();
                                                         @endphp
@@ -831,7 +827,7 @@
                                                     <label> Curnetly working here</label>
                                                     <div class="form-check form-switch form-check-inline form-switch-info">
                                                         <input class="form-check-input" type="checkbox" role="switch"
-                                                            name="present" id="form-switch-info">
+                                                            name="present" id="current_working">
                                                     </div>
 
                                                 </div>
@@ -839,8 +835,9 @@
                                                     <div class="mb-3">
                                                         <label class="form-label">Leaving Date</label>
                                                         <input type="date" class="aiz-date-range form-control"
-                                                            name="end_date" placeholder="Select Date" data-single="true"
-                                                            data-show-dropdown="true" autocomplete="off" />
+                                                            id="leaving_date" name="end_date" placeholder="Select Date"
+                                                            data-single="true" data-show-dropdown="true"
+                                                            autocomplete="off" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -1034,10 +1031,10 @@
                                         <div class="row gutters-10">
                                             @foreach ($user_profile->user->userPortfolios as $key => $portfolio)
                                                 <div class="col-xxl-3 col-lg-4 col-sm-6 p-2">
-                                                    <div class="widget-content widget-content-area br-8">
+                                                    <div class="card">
                                                         <div class="card-body">
                                                             <div class="row">
-                                                                <div class="col-md-9">
+                                                                <div class="col-md-10">
                                                                     <img class="img-fit mw-100"
                                                                         src="{{ asset('profile/portfolios/' . $portfolio->photo) }}"
                                                                         height="240">
@@ -1048,7 +1045,7 @@
                                                                             class="d-block text-secondary">{{ $portfolio->type }}</small>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-2">
                                                                     <div class="absolute-top-right">
                                                                         <a href="{{ route('user_profile.portfolio_edit', encrypt($portfolio->id)) }}"
                                                                             class="mt-2 edit-profile btn btn-sm btn-icon btn-outline-success rounded-circle"
@@ -1333,7 +1330,7 @@
                 _token: '{{ csrf_token() }}',
                 country_id: country_id
             }, function(data) {
-                $('#city_id').html(null);
+                $('#city_id').html();
                 for (var i = 0; i < data.length; i++) {
                     $('#city_id').append($('<option>', {
                         value: data[i].id,
@@ -1372,6 +1369,15 @@
 
     <script>
         $(document).ready(function() {
+
+            $("#current_working").click(function() {
+                var checked_status = this.checked;
+                if (checked_status == false) {
+                    $("#leaving_date").removeAttr("disabled");
+                } else {
+                    $("#leaving_date").attr("disabled", "disabled");
+                }
+            });
 
             var inputElm = document.querySelector('input[name=skills]');
 

@@ -83,7 +83,7 @@
                 <div class="account-content">
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <h3>Service Info</h3>
+                            <h3>Create Service</h3>
                         </div>
                     </div>
                     <div class="tab-content" id="animateLineContent-4">
@@ -102,25 +102,21 @@
                                                         <div class="col-sm-6 mb-4">
                                                             <div class="input-group  mb-3 required">
                                                                 <span class="input-group-text" id="inputGroup-sizing"
-                                                                    for="validationCustom01">Title of Service</span>
+                                                                    for="validationCustom01">Providing the service<span style="color: red">*</span></span>
                                                                 <input type="text" class="form-control "
                                                                     name="title"
-                                                                    placeholder="{{ translate('Enter your service title') }}"
-                                                                    aria-label="Enter your Bank name" required
-                                                                    aria-describedby="nameLabel"
-                                                                    data-msg="Please Enter your Bank name."
-                                                                    data-error-class="u-has-error"
-                                                                    data-success-class="u-has-success">
+                                                                    required
+                                                                    placeholder="{{ translate('Enter your service title') }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 mb-4">
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text"
                                                                     id="inputGroup-sizing-sm">Service
-                                                                    Image</span>
+                                                                    Image<span style="color: red">*</span></span>
                                                                 <input type="file" class="form-control" type="file"
                                                                     name="service_photo" aria-label="Sizing example input"
-                                                                    aria-describedby="inputGroup-sizing-sm">
+                                                                    aria-describedby="inputGroup-sizing-sm" required>
                                                             </div>
                                                         </div>
 
@@ -130,13 +126,13 @@
                                                                 <div class="widget-header">
                                                                     <div class="row">
                                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                            <h4> About Service </h4>
+                                                                            <h4> About The Providing Service<span style="color: red">*</span> </h4>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div>
 
-                                                                    <textarea id="about_service" name="about_service" rows="40" cols="50"> </textarea>
+                                                                    <textarea id="about_service" name="about_service" rows="40" cols="50"></textarea>
 
                                                                 </div>
                                                             </div>
@@ -145,20 +141,23 @@
                                                         <div class="col-sm-6 mb-4">
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text"
-                                                                    id="inputGroup-sizing-sm">Select
-                                                                    Category</span>
+                                                                    id="inputGroup-sizing-sm">Select Service<span style="color: red">*</span></span>
+                                                                    @php
+                                                                        $category_id = Auth::user()->ProfessionalType[0]->category_id;
+                                                                    @endphp
+                                                                    <input type="hidden" name="category_id" value="{{ $category_id }}">
                                                                 <select class="form-select aiz-selectpicker"
-                                                                    name="category_id" id="category_id">
-                                                                    @foreach (\App\Models\ProductCategory::where('status', 1)->get() as $category)
-                                                                        <option value="{{ $category->id }}">
-                                                                            {{ $category->name }}
+                                                                    name="sub_category_id" id="sub_category_id" required>
+                                                                    @foreach (\App\Models\ProductService::where('category_id', $category_id)->where('status', 1)->get() as $service)
+                                                                        <option value="{{ $service->id }}">
+                                                                            {{ $service->title }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-6 mb-4">
+                                                        {{-- <div class="col-sm-6 mb-4">
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text"
                                                                     id="inputGroup-sizing-sm">Select Sub
@@ -168,7 +167,7 @@
 
                                                                 </select>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
 
                                                         <div class="account-content">
                                                             <div class="row mb-3">
@@ -220,10 +219,10 @@
                                                                                                     <span
                                                                                                         class="input-group-text"
                                                                                                         id="inputGroup-sizing"
-                                                                                                        for="validationCustom01">Price
+                                                                                                        for="validationCustom01">Price <span style="color: red">*</span>
                                                                                                         &#2547;</span>
 
-                                                                                                    <input type="text"
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="basic_price"
                                                                                                         placeholder="{{ translate('Enter Price') }}"
@@ -241,8 +240,8 @@
                                                                                                     <span
                                                                                                         class="input-group-text"
                                                                                                         id="inputGroup-sizing-sm">Devilery
-                                                                                                        Within</span>
-                                                                                                    <input type="text"
+                                                                                                        Within<span style="color: red">*</span></span>
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="basic_delivery_time"
                                                                                                         placeholder="{{ translate('Enter Delivery Time') }}"
@@ -260,8 +259,8 @@
                                                                                                     <span
                                                                                                         class="input-group-text"
                                                                                                         id="inputGroup-sizing-sm">Revision
-                                                                                                        Limit</span>
-                                                                                                    <input type="text"
+                                                                                                        Limit<span style="color: red">*</span></span>
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="basic_revision_limit"
                                                                                                         placeholder="{{ translate('Enter Revision Limit') }}"
@@ -363,7 +362,7 @@
                                                                                                         id="inputGroup-sizing"
                                                                                                         for="validationCustom01">Price
                                                                                                         &#2547;</span>
-                                                                                                    <input type="text"
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="standard_price"
                                                                                                         placeholder="{{ translate('Enter Price') }}"
@@ -381,7 +380,7 @@
                                                                                                         class="input-group-text"
                                                                                                         id="inputGroup-sizing-sm">Devilery
                                                                                                         Within</span>
-                                                                                                    <input type="text"
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="standard_delivery_time"
                                                                                                         placeholder="{{ translate('Enter Delivery Time') }}"
@@ -399,7 +398,7 @@
                                                                                                         class="input-group-text"
                                                                                                         id="inputGroup-sizing-sm">Revision
                                                                                                         Limit</span>
-                                                                                                    <input type="text"
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="standard_revision_limit"
                                                                                                         placeholder="{{ translate('Enter Revision Limit') }}"
@@ -481,7 +480,7 @@
                                                                                                         id="inputGroup-sizing"
                                                                                                         for="validationCustom01">Price
                                                                                                         &#2547;</span>
-                                                                                                    <input type="text"
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="premium_price"
                                                                                                         placeholder="{{ translate('Enter Price') }}"
@@ -499,7 +498,7 @@
                                                                                                         class="input-group-text"
                                                                                                         id="inputGroup-sizing-sm">Devilery
                                                                                                         Within</span>
-                                                                                                    <input type="text"
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="premium_delivery_time"
                                                                                                         placeholder="{{ translate('Enter Delivery Time') }}"
@@ -517,7 +516,7 @@
                                                                                                         class="input-group-text"
                                                                                                         id="inputGroup-sizing-sm">Revision
                                                                                                         Limit</span>
-                                                                                                    <input type="text"
+                                                                                                    <input type="number"
                                                                                                         class="form-control "
                                                                                                         name="premium_revision_limit"
                                                                                                         placeholder="{{ translate('Enter Revision Limit') }}"
@@ -737,36 +736,36 @@
 
 
 
-        function get_category_by_subcategory() {
-            var category_id = $('#category_id').val();
-            console.log(category_id);
-            $.post('{{ route('get_category.subcategory') }}', {
-                _token: '{{ csrf_token() }}',
-                category_id: category_id
-            }, function(data) {
-                $('#sub_category_id').html(null);
-                for (var i = 0; i < data.length; i++) {
-                    $('#sub_category_id').append($('<option>', {
-                        value: data[i].id,
-                        text: data[i].title
-                    }));
-                }
-                $("#sub_category_id > option").each(function() {
-                    if (this.value == '') {
-                        $("#sub_category_id").val(this.value).change();
-                    }
-                });
+        // function get_category_by_subcategory() {
+        //     var category_id = $('#category_id').val();
+        //     console.log(category_id);
+        //     $.post('{{ route('get_category.subcategory') }}', {
+        //         _token: '{{ csrf_token() }}',
+        //         category_id: category_id
+        //     }, function(data) {
+        //         $('#sub_category_id').html(null);
+        //         for (var i = 0; i < data.length; i++) {
+        //             $('#sub_category_id').append($('<option>', {
+        //                 value: data[i].id,
+        //                 text: data[i].title
+        //             }));
+        //         }
+        //         $("#sub_category_id > option").each(function() {
+        //             if (this.value == '') {
+        //                 $("#sub_category_id").val(this.value).change();
+        //             }
+        //         });
 
-            });
-        }
+        //     });
+        // }
 
-        $(document).ready(function() {
-            get_category_by_subcategory();
+        // $(document).ready(function() {
+        //     get_category_by_subcategory();
 
-        });
+        // });
 
-        $('#category_id').on('change', function() {
-            get_category_by_subcategory();
-        });
+        // $('#category_id').on('change', function() {
+        //     get_category_by_subcategory();
+        // });
     </script>
 @endsection

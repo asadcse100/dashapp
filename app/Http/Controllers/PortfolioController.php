@@ -23,8 +23,11 @@ class PortfolioController extends Controller
             if ($request->portfolio_img != null) {
                 $imageName = time().'.'.$request->portfolio_img->extension();
                 $request->portfolio_img->move(public_path('profile/portfolios'), $imageName);
+                // $request->portfolio_img->storeAs('profile/portfolios', $imageName);
+
                 $portfolio->photo = $imageName;
             }
+
 
             $portfolio->save();
             // flash(translate('Your Portfolio has been added successfully'))->success();
@@ -55,6 +58,7 @@ class PortfolioController extends Controller
         if ($request->portfolio_img != null) {
             $imageName = time().'.'.$request->portfolio_img->extension();
             $request->portfolio_img->move(public_path('profile/portfolios'), $imageName);
+            // $request->portfolio_img->storeAs('profile/portfolios', $imageName);
             $portfolio->photo = $imageName;
         }
         if ($portfolio->save()) {

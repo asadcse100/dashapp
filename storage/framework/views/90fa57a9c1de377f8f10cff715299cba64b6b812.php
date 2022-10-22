@@ -1,0 +1,81 @@
+
+
+<?php $__env->startSection('content'); ?>
+
+
+<section class="py-4 py-lg-5">
+    <div class="layout-px-spacing">
+        <div class="middle-content container-xxl p-0">
+
+
+            <h2 class="text-center ">List</h2>
+            <table class="table table table-striped table-bordered w-75 mx-auto">
+                <thead class="bg-dark text-white">
+                  <tr>
+                    <th scope="col">Case Title</th>
+                    <th scope="col">Case_No</th>
+                    <th scope="col">File_No</th>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@mdo</td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+        <h2 class="text-center ">Layer Setup</h2>
+        <div class="my-form  mx-auto w-20">
+            <form action="#">
+                <div class="mb-3 row">
+                    <label for="name" class="col-sm-3 col-form-label text-lg-center ">Name</label>
+                    <div class="col-sm-6 col-lg-6">
+                      <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="email" class="col-sm-3 col-form-label text-lg-center ">Email</label>
+                    <div class="col-sm-6 col-lg-6">
+                      <input type="text" class="form-control" name="email" id="email">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="mobile" class="col-sm-3 col-form-label text-lg-center ">Mobile No</label>
+                    <div class="col-sm-6 col-lg-6">
+                      <input type="text" class="form-control" name="mobile" id="mobile">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="details" class="col-sm-3 col-form-label text-lg-center">Details</label>
+                    <div class="col-sm-6 col-lg-6">
+                        <textarea class="form-control" id="details" rows="5"></textarea>
+
+                        <button type="button" class="btn btn-outline-primary btn-lg mt-4">Close</button>
+                        <button type="button" class="btn btn-outline-primary btn-lg float-end mt-4">Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        </div>
+    </div>
+</section>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH J:\Server\htdocs\zeroplus20\resources\views/common/lawyer/lawyer_setup/index.blade.php ENDPATH**/ ?>

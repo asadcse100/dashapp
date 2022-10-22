@@ -1,15 +1,27 @@
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=El%20Messiri">
+<style>
+    #sidebar ul.menu-categories li.menu.active>.dropdown-toggle {
+        background-image: linear-gradient(115deg, #00147a 50%, #00147a 120%);
+    }
+    #sidebar {
+        font-family: "El Messiri SemiBold";
+    }
+    #sidebar ul.menu-categories li.menu>.dropdown-toggle {
+        font-size: 17px;
+    }
+</style>
 <div class="sidebar-wrapper sidebar-theme">
     <nav id="sidebar">
         <div class="navbar-nav theme-brand flex-row  text-center">
             <div class="nav-logo">
                 <div class="nav-item theme-logo">
                     <a href="{{ Route('home') }}">
-                        <img src="{{ asset('templete') }}/src/assets/img/zerop.png" class="navbar-logo" alt="logo">
+                        <img src="{{ asset('templete') }}/src/assets/img/zerop.png" class="navbar-logo" alt="logo"
+                            style="height: 100px; width:auto; margin-left: 25px">
                     </a>
                 </div>
-                <div class="nav-item theme-text">
-                    <a href="" class="nav-link"> ZEROPLUS </a>
-                </div>
+
             </div>
             <div class="nav-item sidebar-toggle">
                 <div class="btn-toggle sidebarCollapse">
@@ -39,209 +51,20 @@
                 </a>
             </li>
 
+            <li class="menu active">
+                <a href="#" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-home">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Product Upload</span>
+                    </div>
+                </a>
+            </li>
 
-
-            @if (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id != 9)
-                <li class="menu">
-                    <a href="#service" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-
-                        @if (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 2)
-                            {{-- Doctor --}}
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                                <span>Doctor Chamber</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </div>
-                        </a>
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 3)
-                            {{-- Engineer --}}
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                                <span>Panel</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </div>
-                        </a>
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 4)
-                            {{-- EcoFin Advisor --}}
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                                <span>EcoFin Chamber</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </div>
-                        </a>
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 5)
-                            {{-- Consultant --}}
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                                <span>Consultant Desk</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </div>
-                        </a>
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 6)
-                            {{-- Teacher --}}
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                                <span>Teacher Panel</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </div>
-                        </a>
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 7)
-                            {{-- Lawyer --}}
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                                <span>Law Chamber</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </div>
-                        </a>
-
-                        @endif
-
-
-                    <ul class="collapse submenu list-unstyled" id="service" data-bs-parent="#accordionExample">
-
-                        <li>
-                            <a href="{{ route('service.freelancer_index') }}"> My Services </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('service.sold') }}"> Sold Services </a>
-                        </li>
-                        <li>
-                            <a href="#"> Service Request</a>
-                        </li>
-
-                        @if (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 2)
-                        {{-- Doctor --}}
-                        <li>
-                            <a href="#"> Prescription </a>
-                        </li>
-                        <li>
-                            <a href="#"> Appointment </a>
-                        </li>
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 3)
-                            {{-- Engineer --}}
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 4)
-                            {{-- EcoFin Advisor --}}
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 5)
-                            {{-- Consultant --}}
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 6)
-                            {{-- Teacher --}}
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 7)
-                            {{-- Lawyer --}}
-                            <li>
-                                <a href="#"> Cases </a>
-                            </li>
-                            <li>
-                                <a href="#"> Lawyer </a>
-                            </li>
-                            <li>
-                                <a href="#"> Courts </a>
-                            </li>
-                            <li>
-                                <a href="#"> Acts </a>
-                            </li>
-                            <li>
-                                <a href="#"> Document Writer </a>
-                            </li>
-                            <li>
-                                <a href="#"> Appointment </a>
-                            </li>
-                        @elseif (!empty(Auth::user()->professional_type_id) && Auth::user()->professional_type_id == 8)
-                            {{-- Staff --}}
-                        @endif
-                    </ul>
-                </li>
-
-            @endif
 
             <li class="menu">
                 <a href="#services" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -267,6 +90,13 @@
                     </div>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="services" data-bs-parent="#accordionExample">
+
+                    <li>
+                        <a href="{{ route('service.freelancer_index') }}"> My Services </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('service.sold') }}"> Sold Services </a>
+                    </li>
 
                     {{-- Client from start --}}
                     <li>

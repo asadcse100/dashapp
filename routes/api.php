@@ -16,7 +16,11 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Api'], function() {
     });
     Route::post('resend_code', 'AuthController@resendCode');
     Route::post('confirm_code', 'AuthController@confirmCode');
-    
 
+    Route::post('android/servicedata', 'DataController@getService');
+    Route::post('android/categorydata', 'DataController@getCategoryData');
+    Route::post('android/subcategorydata', 'DataController@getSubCategoryData');
 });
+
+
 

@@ -17,6 +17,10 @@
         transition: all .3s;
         list-style: circle;
     }
+
+    .footer {
+        font-family: "El Messiri SemiBold";
+    }
 </style>
 
 <div id="footer" class="footer">

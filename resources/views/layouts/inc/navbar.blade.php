@@ -1,3 +1,161 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=El%20Messiri">
+
+<style>
+    .header-container {
+        font-family: "El Messiri Bold";
+        font-size: 18px !important;
+    }
+
+
+
+
+    /* torab start*/
+    .my-drpdown-menu {
+        width: 200px;
+
+        position: absolute;
+        right: 150px;
+        background-color: aliceblue;
+
+        display: none;
+        z-index: 9999;
+        border-radius: 3px;
+        padding: 10px 0px;
+
+    }
+
+    .service-drpdown:hover .my-drpdown-menu {
+        display: block;
+    }
+
+
+    .service-drpdown {
+
+        font-size: 18px;
+        padding-top: 7px;
+        padding-left: 18px;
+        border-radius: 3px;
+
+    }
+
+    .service-drpdown:hover {
+        cursor: pointer;
+        font-size: 18px;
+
+    }
+
+    .my-drpdown-item {
+        display: block;
+        color: black !important;
+        /* padding: 0px 13px !important; */
+        font-size: 18px;
+
+    }
+
+    .my-drpdown-item-a {
+        display: inline-block !important;
+        width: 100%;
+        padding: 2px 13px;
+
+    }
+
+    .my-drpdown-item-a:hover {
+        background-color: #142938;
+        color: rgb(250, 250, 250) !important;
+    }
+
+    .my-drpdown-item a {
+        color: black !important;
+    }
+
+    #navbars {
+        overflow: unset;
+        font-family: "El Messiri SemiBold";
+        font-size: "18px";
+
+    }
+
+    .sub-menu {
+        position: absolute !important;
+        left: 150px;
+        width: 250px;
+        height: 300px;
+        background-color: #193549 !important;
+        /* background-color: aliceblue; */
+        overflow: scroll;
+        display: none;
+        z-index: 9999;
+        border-radius: 3px;
+        padding: 10px 0px;
+
+        /* margin-right:0px !important; */
+        /* padding: 0px 13px !important; */
+    }
+
+
+    .my-drpdown-item:hover .sub-menu {
+        display: inline-block !important;
+    }
+
+    .sub-menu a {
+        color: white !important;
+        font-size: 16px !important;
+
+        display: inline-block !important;
+        color: aliceblue;
+        padding: 2px 13px;
+
+
+    }
+
+    .sub-menu a:hover {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .sub-menu-li {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    /* .sub-menu-li a {
+
+    } */
+
+    @media (max-width: 490px) {
+        .my-drpdown-menu {
+            width: 130px;
+            position: absolute;
+            right: 155px;
+            background-color: aliceblue;
+            display: none;
+            z-index: 9999;
+            border-radius: 3px;
+            padding: 10px 0px;
+        }
+
+
+        .sub-menu {
+            left: 200px !important;
+            width: 170px;
+            margin-left: -70px !important;
+
+        }
+
+
+    }
+
+    .flex-grows {
+        width: 940px !important;
+    }
+
+    /* torab end*/
+
+
+
+    /* torab */
+</style>
 <div class="header-container container-xxl" style="box-sizing: border-box !important">
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" style="padding-bottom: 4px">
@@ -13,14 +171,10 @@
                     </svg>
                 </a>
 
-                <form action="{{ route('search') }}" method="GET" class="flex-grow-1 search-hide">
+                <form action="{{ route('search') }}" method="GET" class="flex-grows search-hide">
                     <div class="input-group">
-                        {{-- <input type="text" class="form-control" placeholder="I'm looking for" name="keyword"> --}}
-                        {{-- <select class="form-select" name="type">
-                                <option>DigiHealth</option>
-                                <option>DigiOfice</option>
-                                <option>EduCare</option>
-                            </select> --}}
+                        <input type="text" class="form-control" placeholder="I'm looking for" name="keyword">
+
                         &#160;
                         <select class="form-select" name="type">
                             <option value="freelancer"
@@ -28,12 +182,11 @@
                             selected
                         @endif @endisset>
                                 Experts</option>
-
                             <option value="project"filter_category
-                                @isset($type) @if ($type == 'project')
+                            @isset($type) @if ($type == 'project')
                             selected
                         @endif @endisset>
-                                Project</option>
+                            Project</option>
 
                             <option value="service"
                                 @isset($type) @if ($type == 'service')
@@ -41,12 +194,11 @@
                         @endif @endisset>
                                 Services</option>
 
-                            <option value="app"
-                                @isset($type) @if ($type == 'app')
+                            <option value="software"
+                                @isset($type) @if ($type == 'software')
                             selected
                         @endif @endisset>
-                                App</option>
-
+                                Software</option>
                         </select>
                         {{-- <button type="submit" class="btn" style="background: #052440"> --}}
                         <button type="submit" class="btn btn-bg">
@@ -63,18 +215,44 @@
                 </form>
 
                 @php
-                    $services = App\Models\ProductCategory::where('status', 1)->get();
+                    $services = App\Models\ProductCategory::where('status', 1)
+                        ->orderby('order_by')
+                        ->get();
                 @endphp
 
                 <ul class="navbar-item flex-row ms-lg-auto ms-0" id="pills-tab" role="tablist">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-current="page">Services</a>
-                        <div class="dropdown-menu">
+                    @php
+                        $services = App\Models\ProductCategory::where('status', 1)
+                            ->orderby('order_by')
+                            ->get();
+                        $servicesubs = App\Models\ProductService::where('status', 1)->get();
+                    @endphp
+
+                    {{-- <li> <a href="{{ Route('service') }}">Services</a></li> --}}
+
+                    <li class="service-drpdown">
+                        Services
+                        <div class="my-drpdown-menu">
+
                             @foreach ($services as $service)
-                                <a class="dropdown-item" href="{{ route('filter_category', $service->id) }}"
-                                    role="tab" aria-selected="false">{{ $service->name }}</a>
+                                <div class="my-drpdown-item">
+                                    <a class="my-drpdown-item-a"
+                                        href="{{ route('filter_category', $service->id) }}">{{ $service->name }}</a>
+                                    <ul class="sub-menu px-0 py-3">
+                                        @php
+                                            $filtereds = $servicesubs->where('category_id', $service->id);
+                                        @endphp
+                                        @if (!empty($filtereds))
+                                            @foreach ($filtereds as $key => $filtered)
+                                                <li class="sub-menu-li"><a class="sub-menu-a"
+                                                        href="{{ Route('filter_category_with_service', [$service->id, $filtered->id]) }}">{{ $filtered->title }}</a>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
+                                </div>
                             @endforeach
+
                         </div>
                     </li>
                     {{-- <li class="nav-item">
@@ -135,7 +313,7 @@
 
                                 <div class="dropdown-item">
                                     <div class="media server-log">
-                                        <img src="{{ asset('templete') }}/src/assets/img/profile-16.jpeg"
+                                        <img src="{{ asset('templete') }}/src/assets/img/demoprofile.png"
                                             class="img-fluid me-2" alt="avatar">
                                         <div class="media-body">
                                             <div class="data-info">
@@ -177,7 +355,7 @@
                                                         <img src="{{ $notification_item['sender_photo'] }}">
                                                     </span>
                                                 @else
-                                                    <img src="{{ asset('templete') }}/src/assets/img/avatar-place.png"
+                                                    <img src="{{ asset('templete') }}/src/assets/img/demoprofile.png"
                                                         class="img-fluid me-2" alt="avatar">
                                                 @endif
 
@@ -230,7 +408,7 @@
                                         <img src="{{ asset('profile/photos/' . Auth::user()->photo) }}"
                                             class="rounded-circle">
                                     @else
-                                        <img src="{{ asset('assets/frontend/default/img/avatar-place.png') }}"
+                                        <img src="{{ asset('assets/frontend/default/img/demoprofile.png') }}"
                                             class="rounded-circle">
                                     @endif
                                 </div>
@@ -315,5 +493,18 @@
     </div>
 </div>
 </div>
+<script>
+    const nav = document.querySelector('#navbars');
+    let navTop = nav.offsetTop;
 
+    function fixedNav() {
+        if (document.body.scrollTop > 80 ||
+            document.documentElement.scrollTop > 80) {
+            nav.classList.add('fixed');
+        } else {
+            nav.classList.remove('fixed');
+        }
+    }
+    window.addEventListener('scroll', fixedNav);
+</script>
 <!--  END NAVBAR  -->

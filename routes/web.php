@@ -1,13 +1,21 @@
 <?php
 
 Route::get('/android/{id}', 'AddonController@manualLogin');
+Route::get('/show-service-details/{id}', 'HomeController@show_service_details')->name('show_service_details');
 
 Route::get('/refresh-csrf', function(){
     return csrf_token();
 });
 
-Route::resource('matter', 'MatterShareController');
+Route::get('fullcalender', [HomeController::class, 'dashboard'])->name('full_calender');
+Route::post('fullcalenderAjax', [HomeController::class, 'fullcalenderAjax'])->name('fullcalender_ajax');
 
+Route::get('/sub_menu', 'HomeController@sub_menu')->name('sub_menu');
+
+Route::get('/matter-index', 'MatterShareController@index')->name('matter');
+Route::get('/matter-indexonly', 'MatterShareController@indexOnly')->name('matter_index');
+
+Route::resource('matter', 'MatterShareController');
 Route::get('/product-details/{id}', 'HomeController@product_details')->name('product_details');
 Route::get('/service-details/{id}', 'HomeController@service_details')->name('service_details');
 Route::get('/filter-category/{id}/{service_id}', 'ServiceController@filter_category_with_service')->name('filter_category_with_service');
@@ -27,7 +35,7 @@ Route::get('/aiz-uploader/download/{id}', 'AizUploadController@attachment_downlo
 Route::get('invite', 'Auth\RegisterController@referral')->name('auth.invite');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::match(['get', 'post'], '/', 'HomeController@index')->name('home');
 
 Route::post('aamarpay_payment_url', 'AamarPayController@aamarpay_payment_url')->name('aamarpay_payment_url');
 Route::post('payment/success', 'AamarPayController@paymentSuccessOrFailed')->name('payment.success');
@@ -72,6 +80,26 @@ Route::group(['middleware' => ['user']], function(){
 });
 
 Route::group(['middleware' => ['user', 'packagePurchased']], function(){
+
+    // For the Lawyer package
+
+    Route::resource('/act-setup', 'LawyerActController');
+	Route::get('act-setup/destroy/{id}', 'LawyerActController@destroy')->name('act_setup.destroy');
+
+	Route::resource('/lawyer-court', 'LawyerCourtController');
+	Route::get('lawyer/destroy/{id}', 'LawyerCourtController@destroy')->name('lawyer.court.destroy');
+
+	Route::resource('/lawyer', 'LawyerController');
+	Route::get('lawyer/destroy/{id}', 'LawyerController@destroy')->name('lawyer.destroy');
+
+	Route::resource('/court-category', 'LawyerCourtCategoryController');
+	Route::get('court-category/destroy/{id}', 'LawyerCourtCategoryController@destroy')->name('court_setup.destroy');
+
+	Route::resource('/case', 'LawyerCaseController');
+	Route::get('case/destroy/{id}', 'LawyerCaseController@destroy')->name('case.destroy');
+    // Lawyer package end
+
+
 	Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/referral', 'ReferralController@index')->name('referral');
 	Route::get('/projects/running-project', 'ProjectController@my_running_project')->name('projects.my_running_project');
@@ -163,6 +191,7 @@ Route::group(['middleware' => ['auth', 'packagePurchased']], function(){
 
 
 	Route::get('/account-settings', 'ProfileController@user_account')->name('user.account');
+	Route::post('/passupdate', 'ProfileController@passupdate')->name('passupdate');
 
 	Route::post('/profile-settings/portfolio-add', 'PortfolioController@store')->name('user_profile.portfolio_add');
 	Route::get('/profile-settings/portfolio-edit/{id}', 'PortfolioController@edit')->name('user_profile.portfolio_edit');
@@ -271,7 +300,3 @@ Route::post('/paytm/callback', 'PaytmController@callback')->name('paytm.callback
 
 
 Route::get('/{slug}', 'PageController@show_custom_page')->name('custom-pages.show_custom_page');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

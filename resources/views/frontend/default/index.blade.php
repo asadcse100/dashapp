@@ -29,77 +29,6 @@
                             </button>
                         </div>
 
-                        {{-- <div class="aa">
-
-                            <a class ="btn fourth" href="{{ Route('user.login') }}">Get Started </a>
-                        </div> --}}
-
-                        {{-- <div class="btnGS">
-
-                            <a class ="btnlink" href="{{ Route('user.login') }}">Get Started </a>
-
-                        </div> --}}
-
-                        {{-- <div class='hexbuttons'>
-                            <div class='hexr'>
-                                <div class='hexagon'><span  title='account'><i class='fa fa-bolt icon'></i></span></div>
-                                <div class='hexagon'><span title='navigation'><i class='fa fa-map icon'></i></span></div>
-                                <div class='hexagon'><span title='theme'><i class='fa fa-magic icon'></i></span></div>
-                            </div>
-                            <div class='hexr'>
-                                <div class='hexagon'><span  title='about us'><i class='fa fa-home icon'></i></span></div>
-                                <div class='hexagon'><span title='placeholder'><i class='fa fa-building icon'></i></span></div>
-                            </div>
-                            <div class='hexr'>
-                                <div class='hexagon'><span  title='favorites'><i class='fa fa-star icon'></i></span></div>
-                                <div class='hexagon'><span title='new post'><i class='fa fa-pencil icon'></i></span></div>
-                                <div class='hexagon'><span title='liked'><i class='fa fa-heart icon'></i></span></div>
-                            </div>
-                        </div> --}}
-
-
-                        {{-- <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
-                            data-aos-delay="200">
-                            <input type="text" class="form-control" placeholder="">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form> --}}
-                        {{-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                            <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
-
-                                <div class="col-lg-3 col-sm-3 col-6">
-                                    <div class="stats-item text-center w-100 h-100">
-                                        <span data-purecounter-start="0" data-purecounter-end="232"
-                                            data-purecounter-duration="1" class="purecounter"></span>
-                                        <p>Clients</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-sm-3 col-6">
-                                    <div class="stats-item text-center w-100 h-100">
-                                        <span data-purecounter-start="0" data-purecounter-end="521"
-                                            data-purecounter-duration="1" class="purecounter"></span>
-                                        <p>Projects</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-sm-3 col-6">
-                                    <div class="stats-item text-center w-100 h-100">
-                                        <span data-purecounter-start="0" data-purecounter-end="1453"
-                                            data-purecounter-duration="1" class="purecounter"></span>
-                                        <p>Support</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-sm-3 col-6">
-                                    <div class="stats-item text-center w-100 h-100">
-                                        <span data-purecounter-start="0" data-purecounter-end="32"
-                                            data-purecounter-duration="1" class="purecounter"></span>
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
@@ -113,7 +42,76 @@
     </div>
 
     {{-- Hero Section End --}}
+    <!-- about -->
+    <section class="section-style" style="background-color: #05223D">
+        <div class="container-fluid">
+            <div class="row justify-content-center new-style">
+                <div class="container" style="font-family:El Messiri SemiBold">
+                    <div class="">
+                        <div class="section-title">
+                            <h2 style="font-family:El Messiri SemiBold">An <span class="green"> Overview</span></h2>
+                        </div>
 
+                        <p class="mb-2 text-justify fs-18" style="font-size: 16px">
+                            ZeroPlus is a recognized leader in providing a specialized high-performance digital office
+                            platform.
+                            It provides Legal Support, EcoFin Solutions, Health, Education & Consultancy services
+                            through
+                            internal and external drivers by using the ZeroPlus Digi office.
+                            It offers a wide range of services to its clients, both nationally and internationally.
+                            Our expert professionals can represent the most demanding and sophisticated clients in a
+                            broad
+                            and diverse set of matters in the various jurisdictions covered by ZeroPlus. ZeroPlus
+                            collaborates very closely with all offices to provide world-class service through internal
+                            and
+                            external drivers in the most innovative, effective, and efficient way.
+                        </p>
+                        <p class="mb-2 text-justify fs-18" style="font-size: 16px">
+                            By providing registration and user ID, people are connected to a specialized digital office
+                            platform.
+                            'To assign' and 'To be assigned' by using artificial intelligence, our professionals provide
+                            excellent service of the highest international standards of quality through internal and
+                            external drivers.
+                        </p>
+                        <p class="mb-2 text-justify fs-18" style="font-size: 16px">
+                            National-Multinational company, Law chambers, CA firm, Consultancy firm, Shop owners,
+                            Financial
+                            and Educational Institute, Hospital, Clinic, Corporate Business Man, individual
+                            professionals
+                            like Doctor, engineer, Lawyer, Consultant, Teacher Accountant, Pharmacist, Architect,
+                            Banker,
+                            Plumber, Electrician, Researcher, Student, Labour - each and everyone is client of each
+                            other
+                            based on necessity.
+                        </p>
+                        <p class="mb-2 text-justify fs-18" style="font-size: 16px">
+                            By using artificial intelligence, the ultimate and interrelated assignment through the IP
+                            address of the device, people are being connected instantly and provided the service as per
+                            requirement. Unlimited clients await professional help and professionals can also seek
+                            clients
+                            in the system.
+                            This platform ensures a wide pool of clients, professionals, and standard service. ZeroPlus
+                            also
+                            shares 20% of its revenue to its subscribers who refer other subscribers by sharing their
+                            identical "Referent Code" as a default system-generated procedure. Thriving for a smarter
+                            world
+                            through technological revolution is the utter passion of this organization.
+                            ZeroPlus is committed to keeping subscribers' confidentiality and building trust through
+                            transparency for a lifetime.
+                        </p>
+                        <p class="mb-2 text-justify fs-18" style="padding-bottom: 50px" style="font-size: 16px">
+                            To provide and get reasonable service click <a href="https://zeroplus.world/"
+                                style="color:#1ed174;">www.zeroplus.world</a> and register by choosing a suitable level
+                            of
+                            subscriber where you fit.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /about -->
 
     {{-- Our featured categories --}}
     {{-- <section style="margin-top: 0px">
@@ -121,7 +119,7 @@
             <div class="fq-header-wrapper"> --}}
 
 
-                {{-- <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    {{-- <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="faq container">
                         <div class="faq-layouting layout-spacing">
                             <div class="kb-widget-section">
@@ -147,47 +145,43 @@
                                                                         <div class="col-sm-2 mb-4">
                                                                             <a
                                                                                 href=" {{ Route('product_details', $category->id) }} ">
-                                                                                <div class="card-item">
-                                                                                    <div class="photo">
-                                                                                        <img class="main-state"
-                                                                                            src="{{ asset($category->image) }}"
-                                                                                            alt="">
-                                                                                        <img class="hover"
-                                                                                        src="{{ asset('templete') }}/src/assets/img/carousel/business-development-hover.svg"
-                                                                                        alt="">
-                                                                                    </div>
-                                                                                    <h5 class="textCustom">
-                                                                                        {{ $category->name }}
-                                                                                    </h5>
-                                                                                </div>
-                                                                            </a>
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+<div class="card-item">
+    <div class="photo">
+        <img class="main-state" src="{{ asset($category->image) }}" alt="">
+        <img class="hover" src="{{ asset('templete') }}/src/assets/img/carousel/business-development-hover.svg" alt="">
+    </div>
+    <h5 class="textCustom">
+        {{ $category->name }}
+    </h5>
+</div>
+</a>
+</div>
+@endforeach
+</div>
+</div>
+</div>
+</div>
 
 
-                                                </div>
+</div>
 
-                                            </div>
+</div>
 
-                                        </div>
+</div>
 
-                                    </div>
+</div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+</div>
+</div>
+</div>
+</div>
 
-                </div> --}}
+</div> --}}
 
 
-                {{-- populer expert start --}}
+    {{-- populer expert start --}}
 
-                {{-- <div class="section-title">
+    {{-- <div class="section-title">
                     <h2 class="textCustom">Latest <span class="green">Services</span></h2>
                 </div>
                 <div class="faq container">
@@ -204,55 +198,48 @@
                                         <div class="card">
                                             <a href="{{ route('service.show', $service->slug) }}">
 
-                                                @if (!empty($service->image))
-                                                    <img src="{{ asset('storage/uploads/services/' . $service->image) }}"
-                                                        class="card-img-top" height="200px;"
-                                                        alt="{{ asset($service->slug) }}">
-                                                @else
-                                                    <img src="{{ asset('templete') }}/src/assets/img/dummy-post-horisontal.jpg"
-                                                        alt="Team Image" style="height: 100px; width:100px;">
-                                                @endif
-                                            </a>
+@if (!empty($service->image))
+<img src="{{ asset('storage/uploads/services/' . $service->image) }}" class="card-img-top" height="200px;" alt="{{ asset($service->slug) }}">
+@else
+<img src="{{ asset('templete') }}/src/assets/img/dummy-post-horisontal.jpg" alt="Team Image" style="height: 100px; width:100px;">
+@endif
+</a>
 
-                                            <div class="card-body">
+<div class="card-body">
 
-                                                <div class="media mt-4 mb-0 pt-1">
-                                                    @if (!empty(Auth::user()->photo))
-                                                        <img src="{{ asset('profile/photos/' . Auth::user()->photo) }}"
-                                                            class="card-media-image me-3" alt="{{ Auth::user()->photo }}">
-                                                    @else
-                                                        <img src="{{ asset('assets/frontend/default/img/avatar-place.png') }}"
-                                                            class="card-media-image me-3" alt="">
-                                                    @endif
-                                                    <a href="{{ route('freelancer.details', $service->user->user_name) }}">
-                                                        <div class="media-body">
-                                                            <h4 class="media-heading mt-3">
-                                                                {{ $service->user->name }}</h4>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <h5 class="card-title"> <a
-                                                        href="{{ route('freelancer.details', $service->user->user_name) }}"
-                                                        class="text-dark"></a>
-                                                </h5>
-                                                <hr>
-                                                <a href="{{ route('service.show', $service->slug) }}" class="text-dark">
-                                                    <h5 class="card-title">
-                                                        {{ \Illuminate\Support\Str::limit($service->title, 40, $end = '...') }}
-                                                    </h5>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+    <div class="media mt-4 mb-0 pt-1">
+        @if (!empty(Auth::user()->photo))
+        <img src="{{ asset('profile/photos/' . Auth::user()->photo) }}" class="card-media-image me-3" alt="{{ Auth::user()->photo }}">
+        @else
+        <img src="{{ asset('assets/frontend/default/img/avatar-place.png') }}" class="card-media-image me-3" alt="">
+        @endif
+        <a href="{{ route('freelancer.details', $service->user->user_name) }}">
+            <div class="media-body">
+                <h4 class="media-heading mt-3">
+                    {{ $service->user->name }}</h4>
+            </div>
+        </a>
+    </div>
+    <h5 class="card-title"> <a href="{{ route('freelancer.details', $service->user->user_name) }}" class="text-dark"></a>
+    </h5>
+    <hr>
+    <a href="{{ route('service.show', $service->slug) }}" class="text-dark">
+        <h5 class="card-title">
+            {{ \Illuminate\Support\Str::limit($service->title, 40, $end = '...') }}
+        </h5>
+    </a>
+</div>
+</div>
+</div>
+@endforeach
 
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- populer expert end --}}
-                {{-- populer expert start --}}
-                {{-- <div class="">
+</div>
+</div>
+</div>
+</div> --}}
+    {{-- populer expert end --}}
+    {{-- populer expert start --}}
+    {{-- <div class="">
                     <div class="section-title">
                         <h2 class="textCustom">Popular <span class="green">Experts</span></h2>
                     </div>
@@ -272,28 +259,27 @@
                                                 <div class="team-img" style="text-align: center">
                                                     @if (!empty($expert->photo))
                                                         <img src="{{ asset('profile/photos/' . $expert->photo) }}"
-                                                            alt="Team Image" style="height: 150px; width:150px;">
-                                                    @else
-                                                        <img src="{{ asset('templete') }}/src/assets/img/demoprofile.png"
-                                                            alt="Team Image" style="height: 150px; width:150px;">
-                                                    @endif
-                                                </div>
-                                                <div class="team-content text-center">
-                                                    <h3 class="textCustom">{{ $expert->name }}</h3>
-                                                    <h3 class="textCustom">Designation</h3>
+alt="Team Image" style="height: 150px; width:150px;">
+@else
+<img src="{{ asset('templete') }}/src/assets/img/demoprofile.png" alt="Team Image" style="height: 150px; width:150px;">
+@endif
+</div>
+<div class="team-content text-center">
+    <h3 class="textCustom">{{ $expert->name }}</h3>
+    <h3 class="textCustom">Designation</h3>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+</div>
+</div>
+</div>
+@endforeach
+</div>
+</div>
+</div>
+</div>
+</div> --}}
 
 
-            {{-- </div>
+    {{-- </div>
         </div>
     </section> --}}
 @endsection

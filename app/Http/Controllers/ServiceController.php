@@ -55,7 +55,7 @@ class ServiceController extends Controller
         $data['total'] = count($data['services']->get());
         $data['services'] = $data['services']->paginate(8)->appends($request->query());
 
-        $data['product_categories'] = DB::table('product_categories')->select('id', 'name', 'image')->where('status',1)->get();
+        $data['product_categories'] = DB::table('product_categories')->select('id', 'name', 'image')->where('order_by')->where('status',1)->get();
 
         return view('frontend.default.services-listing', $data);
 
@@ -72,7 +72,7 @@ class ServiceController extends Controller
 
         $data['total'] = count($data['services']->get());
         $data['services'] = $data['services']->paginate(8)->appends($request->query());
-        $data['product_categories'] = DB::table('product_categories')->select('id', 'name', 'image')->where('status',1)->get();
+        $data['product_categories'] = DB::table('product_categories')->select('id', 'name', 'image')->where('status',1)->orderby('order_by')->get();
         return view('frontend.default.services-listing', $data);
     }
 
@@ -88,7 +88,7 @@ class ServiceController extends Controller
 
         $data['total'] = count($data['services']->get());
         $data['services'] = $data['services']->where('product_category_id',$id)->where('product_service_id',$service_id)->paginate(8)->appends($request->query());
-        $data['product_categories'] = DB::table('product_categories')->select('id', 'name', 'image')->where('status',1)->get();
+        $data['product_categories'] = DB::table('product_categories')->select('id', 'name', 'image')->where('status',1)->orderby('order_by')->get();
         return view('frontend.default.services-listing-sub', $data);
     }
 
@@ -176,10 +176,16 @@ class ServiceController extends Controller
      */
     public function edit($slug)
     {
-        $service = Service::where('slug', $slug)->first();
-        $service_packages = $service->service_packages;
+        $data = [];
+        $data['service'] = Service::where('slug', $slug)->first();
 
-        return view('frontend.default.user.freelancer.projects.services.edit', compact('service', 'service_packages'));
+        if(isset($data['service']) && !empty($data['service'])){
+            $data['service_packages'] = $data['service']->service_packages;
+        }else{
+            return abort(404);
+        }
+
+        return view('frontend.default.user.freelancer.projects.services.edit',$data);
     }
 
     /**
@@ -191,11 +197,12 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        // dd($request->toArray());
         // if(!$this->validate_service($request)) {
         //     // flash(translate('Sorry! Your validation was not successful.'))->error();
         //     return redirect(route('service.edit', $slug));
         // }
-        
+
         $service_updated = ServicesUtility::update_service($request, $slug);
 
         if($service_updated == 1) {

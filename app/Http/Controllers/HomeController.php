@@ -41,6 +41,11 @@ class HomeController extends Controller
         return view('frontend.default.index', $data);
     }
 
+    public function sub_menu()
+    {
+        return $data;
+    }
+
     public function product_details($id)
     {
         $data = [];
@@ -66,6 +71,14 @@ class HomeController extends Controller
         $data['relate_services'] = DB::table('product_services')->select('id', 'title', 'short_description','long_description', 'image')->where('status',1)->where('category_id', $id)->get();
 
         return view('frontend.default.service_details', $data);
+    }
+    public function show_service_details($id)
+    {
+        $data = [];
+        $data['product_services'] = DB::table('product_services')->select('id', 'title', 'short_description','long_description', 'image')->where('status',1)->where('id', $id)->first();
+        $data['relate_services'] = DB::table('product_services')->select('id', 'title', 'short_description','long_description', 'image')->where('status',1)->where('category_id', $id)->get();
+
+        return view('frontend.default.show_service_details', $data);
     }
 
     public function get_category_by_subcategory(Request $request)
@@ -116,11 +129,57 @@ class HomeController extends Controller
     // }
 
     //Redirect user-based dashboard
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $user_profile = UserProfile::where('user_id', Auth::user()->id)->first();
+
+        if($request->ajax()) {
+       
+            $data = Calendar::whereDate('start', '>=', $request->start)
+                      ->whereDate('end',   '<=', $request->end)
+                      ->get(['id', 'title', 'start', 'end']);
+ 
+            return response()->json($data);
+       }
+
         return view('frontend.default.user.freelancer.dashboard');
     }
+
+    public function fullcalenderAjax(Request $request)
+    {
+        switch ($request->type) {
+            case 'add':
+                $calendar = Calendar::create([
+                    'title' => $request->title,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                ]);
+    
+                return response()->json($calendar);
+                break;
+    
+            case 'update':
+                $calendar = Calendar::find($request->id)->update([
+                    'title' => $request->title,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                ]);
+    
+                return response()->json($calendar);
+                break;
+    
+            case 'delete':
+                $calendar = Calendar::find($request->id)->delete();
+    
+                return response()->json($calendar);
+                break;
+                
+            default:
+                # code...
+                break;
+            }
+        }
+    
 
     //Show details info of specific project
     public function project_details($slug)

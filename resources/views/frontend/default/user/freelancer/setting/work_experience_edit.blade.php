@@ -36,12 +36,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="custom-control custom-checkbox form-group">
-                                                    <input type="checkbox" class="custom-control-input" id="stylishCheckbox"
+                                                <label> Curnetly working here</label>
+                                                <div class="form-check form-switch form-check-inline form-switch-info">
+                                                    <input class="form-check-input" type="checkbox" role="switch"
                                                         name="present" @if ($work_exp->present == '1') checked @endif
-                                                        data-show="checkedShow" data-target=".leaving-date">
-                                                    <label class="custom-control-label"
-                                                        for="stylishCheckbox">{{ translate('currently working here') }}</label>
+                                                        id="current_working">
                                                 </div>
 
                                             </div>
@@ -50,7 +49,7 @@
                                                     <label class="form-label">Leaving Date</label>
                                                     <input type="date" class="aiz-date-range form-control"
                                                         name="end_date" value="{{ $work_exp->end }}" data-single="true"
-                                                        data-show-dropdown="true" autocomplete="off" />
+                                                        id="leaving_date" data-show-dropdown="true" autocomplete="off" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -92,4 +91,16 @@
         </div>
         </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                $("#current_working").click(function() {
+                    var checked_status = this.checked;
+                    if (checked_status == false) {
+                        $("#leaving_date").removeAttr("disabled");
+                    } else {
+                        $("#leaving_date").attr("disabled", "disabled");
+                    }
+                });
+            });
+        </script>
     @endsection

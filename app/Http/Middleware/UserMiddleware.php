@@ -16,7 +16,7 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && (isClient() || isFreelancer()) && !Auth::user()->banned) {
+        if (Auth::check()) {
             return $next($request);
         }
         else{

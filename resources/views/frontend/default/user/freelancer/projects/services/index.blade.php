@@ -16,7 +16,7 @@
                             </ol>
                         </div>
                         <div class="col-md-2">
-                            <a href="{{ route('service.create') }}" class="btn btn-light-info mb-2 me-4">Add
+                            <a href="{{ route('service.create') }}" class="btn btn-primary mb-2 me-4">Add
                                 Service</a>
                         </div>
                     </div>
@@ -30,12 +30,12 @@
 
                             <div class="row">
                                 @foreach ($services as $service)
-                                    <div class="col-sm-4 mb-4">
+                                    <div class="col-sm-3 mb-4">
                                         <div class="card">
                                             <a href="{{ route('service.show', $service->slug) }}">
                                                 @if (!empty($service->image))
                                                     <img src="{{ asset('storage/uploads/services/' . $service->image) }}"
-                                                        class="card-img-top" height="220" alt="{{ $service->slug }}.">
+                                                        class="card-img-top" height="200" alt="{{ $service->slug }}.">
                                                 @else
                                                     <img src="{{ asset('assets/frontend/default/img/avatar-place.png') }}"
                                                         class="card-media-image me-3" alt="">
@@ -57,15 +57,16 @@
                                                     </div>
                                                 </a>
                                             </div>
+                                           
                                             <a href="{{ route('service.show', $service->slug) }}">
                                                 <div class="card-body px-0 pb-0 ">
-                                                    <h5 class="card-title mb-3 container">
+                                                    <p class="card-title mb-3 container">
                                                         {{ \Illuminate\Support\Str::limit($service->title, 40, $end = '...') }}
-                                                    </h5>
+                                                    </p>
                                                 </div>
                                             </a>
 
-                                            <div class="container">
+                                            <div class="container text-center">
                                                 <span type="button" data-bs-dismiss="modal"
                                                     class="badge outline-badge-primary mb-2 me-4"> <a
                                                         href="{{ route('service.edit', $service->slug) }}">Edit</a></span>

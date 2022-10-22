@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Skill;
+use App\Models\ProfessionalType;
 use Gate;
 
 class SkillController extends Controller
@@ -20,8 +21,11 @@ class SkillController extends Controller
      */
     public function index()
     {
-        $skills = Skill::latest()->paginate(10);
-        return view('admin.default.freelancer.skills.index', compact('skills'));
+        $data = [];
+        $data['skills'] = Skill::latest()->paginate(10);
+        $data['category'] = ProfessionalType::where('status', 1)->get();
+
+        return view('admin.default.freelancer.skills.index', $data);
 
     }
 
@@ -45,6 +49,7 @@ class SkillController extends Controller
     {
         $skill = new Skill;
         $skill->name = $request->name;
+        $skill->category_id = $request->profe_id;
         if ($skill->save()) {
             // flash('New Skill has been inserted successfully')->success();
             return redirect()->route('skills.index');

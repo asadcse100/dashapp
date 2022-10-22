@@ -24,17 +24,15 @@ class AamarPayController extends Controller
 {
     public function paymentSuccessOrFailed(Request $request)
     {
+        // dd($request->opt_a);
         if($request->get('pay_status') == 'Failed') {
             return redirect()->back();
         }
-
         Auth::loginUsingId($request->opt_b);
-
         // 'opt_a'=>$package_id,
         // 'opt_b'=>Auth::user()->id,
         // 'opt_c'=>'package_payment',
         // 'opt_d'=>'AamarPay'
-
       //  $translations_log = Translations_log::where('mer_txnid', $request->mer_txnid)->first();
       $amount = 0;
       if($request->opt_c == 'package_payment'){
@@ -42,19 +40,18 @@ class AamarPayController extends Controller
         $amount = $priceData->price;
       }elseif($request->opt_c == 'service_payment'){
         $priceData = ServicePackage::where('id', $request->opt_a)->first();
-        $amount = $priceData->amount;
+        $amount = $priceData->service_price;
       }elseif($request->opt_c == 'milestone_payment'){
         //
       }
     //   $amount = $translations_log->amount;
-
+        // dd($amount);
         $payment = new Aamarpay(config('aamarpay'));
         if((int)$amount != (int)$request->amount){
             $valid =false;
         }else
         {
             $valid =true;
-
             DB::table('translations_logs')->where('mer_txnid', $request->mer_txnid)->updateOrInsert($request->toArray());
             DB::table('transactions')->updateOrInsert(
                 [
@@ -70,18 +67,20 @@ class AamarPayController extends Controller
             );
         }
 
-
         if($valid) {
             try{
                 if ($request->opt_c == 'milestone_payment') {
                     $milestone_payment = new MilestonePaymentController;
                     $milestone_payment->aamarpay_milestone_payment_done($request->opt_a, $request->mer_txnid);
+                    return redirect()->route('dashboard');
                 } elseif ($request->opt_c == 'package_payment') {
                     $package_payment = new PackagePaymentController;
                     $package_payment->aamarpay_package_payment_done($request->opt_a, $request->mer_txnid);
+                    return redirect()->route('dashboard');
                 } elseif ($request->opt_c == 'service_payment') {
                     $package_payment = new ServicePaymentController;
                     $package_payment->aamarpay_service_package_payment_done($request->opt_a, $request->mer_txnid);
+                    return redirect()->route('dashboard');
                 }
             }
             catch (\Exception $e) {
@@ -101,7 +100,7 @@ class AamarPayController extends Controller
     public static function getHiddenField($price, $package_id, $service_type)
     {
         $userData = Auth()->user();
-
+// dd($package_id);
         // $data['package_id'] = $package_id;
         // $data['payment_method'] = 'AamarPay';
         // $data['amount'] = $price;

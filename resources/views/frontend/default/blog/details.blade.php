@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('meta_title'){{ $blog->meta_title }}@stop
-
 @section('meta_description'){{ $blog->meta_description }}@stop
-
 @section('meta_keywords'){{ $blog->meta_keywords }}@stop
 
 @section('meta')
@@ -70,7 +68,6 @@
 </section>
 
 @endsection
-
 
 @section('script')
     @if (get_setting('fb_comment_activation_checkbox') == 1)

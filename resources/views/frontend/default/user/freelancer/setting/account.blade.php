@@ -22,7 +22,6 @@
 
     <link href="{{ asset('templete') }}/src/assets/css/light/users/account-setting.css" rel="stylesheet" type="text/css" />
 
-
     <link href="{{ asset('templete') }}/src/plugins/css/dark/filepond/custom-filepond.css" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('templete') }}/src/assets/css/dark/components/tabs.css" rel="stylesheet" type="text/css">
@@ -37,7 +36,6 @@
 
     <link href="{{ asset('templete') }}/src/assets/css/dark/users/account-setting.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templete') }}/src/plugins/css/dark/tagify/custom-tagify.css" rel="stylesheet" type="text/css" />
-
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
 
@@ -79,8 +77,6 @@
                                             </svg> Account</a>
                                     </li>
 
-
-
                                     <li class="nav-item">
                                         <a class="nav-link" id="animated-underline-profile-tab" data-bs-toggle="tab"
                                             href="#animated-underline-profile" role="tab"
@@ -94,9 +90,6 @@
                                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                                             </svg> Payment</a>
                                     </li>
-
-
-
                                 </ul>
                             </div>
                         </div>
@@ -107,45 +100,40 @@
                             aria-labelledby="animated-underline-home-tab">
                             <div class="row">
 
-
                                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                                    <form id="social" class="section social">
                                         <div class="info">
                                             <h5 class="">Change Password</h5>
                                             <div class="row">
-
-                                                <div class="col-md-11 mx-auto">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group social-linkedin mb-3">
-                                                                <span class="input-group-text text-primary"
-                                                                    id="inputGroup-sizing-sm">New
-                                                                    Password</span>
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="New Password" aria-label="Username"
-                                                                    aria-describedby="linkedin" value="">
+                                                <form method="POST" action="{{ route('passupdate') }}">
+                                                    @csrf
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="input-group  mb-3">
+                                                                    <span class="input-group-text text-primary">New
+                                                                        Password</span>
+                                                                    <input type="password" name="new_password" class="form-control"
+                                                                        placeholder="New Password">
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="col-md-6">
-                                                            <div class="input-group social-tweet mb-3">
-                                                                <span class="input-group-text text-primary"
-                                                                    id="inputGroup-sizing-sm">Confirm Password</span>
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Confirm Password" aria-label="Username"
-                                                                    aria-describedby="tweet" value="">
+                                                            <div class="col-md-6">
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text text-primary">Confirm Password</span>
+                                                                    <input type="password" class="form-control"
+                                                                        placeholder="Confirm Password" name="confirm_password"
+                                                                        >
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="text-center">
-                                                    <button type="submit"
-                                                        class="btn btn-success transition-3d-hover mr-1">{{ translate('Password Update') }}</button>
-                                                </div>
-
+                                                    <div class="text-center">
+                                                        <button type="submit"
+                                                            class="btn btn-success transition-3d-hover mr-1">{{ translate('Password Update') }}</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +171,7 @@
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">Routing/IBAN/SWIFT/BIC number</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="number" class="form-control">
                                                     </div>
                                                 </div>
 
@@ -264,7 +252,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Card Number</label>
-                                                        <input type="text"
+                                                        <input type="number"
                                                             class="form-control add-payment-method-input">
                                                     </div>
                                                 </div>
@@ -277,13 +265,13 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">CVV/CVV2</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="number" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Card Expiry</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="number" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,8 +319,6 @@
                                 </div>
                             </div>
                         </div>
-
-
 
                     </div>
                 </div>

@@ -4,14 +4,22 @@
     <div class="auth-container d-flex">
         <div class="container mx-auto align-self-center">
             <div class="row">
-                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 col-12 d-flex flex-column align-self-center mx-auto">
+                <div class="col-xxl-6 col-xl-5 col-lg-5 col-md-8 col-12 d-flex flex-column align-self-center mx-auto">
                     <div class="card mt-3 mb-3">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <h2>Join with us</h2>
-                                    <p>Fill out the form to get started</p><hr>
+                                <div class="text-center">
+                                    <a href="">
+                                        <img src="{{ asset('templete') }}/src/assets/img/zerop.png" class="navbar-logo"
+                                            alt="logo" style="height: 110px; width:auto;">
+                                    </a>
                                 </div>
+                                <div class="col-md-12 mb-3 text-center">
+                                    <h4>Join with us</h4>
+                                    <p>Fill out the form to get started</p>
+                                    <hr>
+                                </div>
+
                                 <form class="" id="reg-form" method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <input type="hidden" name="user_types[]" value="freelancer">
@@ -40,8 +48,8 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">Phone</label>
-                                            <input type="phone" class="form-control @error('phone') is-invalid @enderror"
-                                                placeholder="017***" name="phone">
+                                            <input type="number" class="form-control @error('phone') is-invalid @enderror"
+                                                placeholder="Your Phone Number" name="phone" required>
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                             @enderror
@@ -63,9 +71,8 @@
                                     <div class="col-12">
                                         <div class="mb-4">
                                             <label class="form-label ">Confirm Password</label>
-                                            <input type="password"
-                                                class="form-control"
-                                                placeholder="********" name="password_confirmation" required>
+                                            <input type="password" class="form-control" placeholder="********"
+                                                name="password_confirmation" required>
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                             @enderror
@@ -77,11 +84,12 @@
                                     <div class="col-12">
                                         <div class="mb-4">
                                             <label class="form-label ">Refferal Code</label>
-                                            <input type="text" class="form-control" name="refer" @if(!empty($reffer_code)) value="{{$reffer_code}}" disabled @endif>
+                                            <input type="text" class="form-control" name="refer"
+                                                @if (!empty($reffer_code)) value="{{ $reffer_code }}" @endif>
                                         </div>
                                     </div>
 
-{{--
+                                    {{--
                                     <div class="form-group mb-4">
                                         <div class="aiz-radio-inline">
                                             <label class="aiz-radio">
@@ -96,21 +104,22 @@
                                         </div>
                                     </div> --}}
 
-                                    @if(get_setting('google_recaptcha_activation_checkbox') == 1)
-                                <div class="form-group">
-                                    <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_KEY') }}"></div>
-                                </div>
-                            @endif
+                                    @if (get_setting('google_recaptcha_activation_checkbox') == 1)
+                                        <div class="form-group">
+                                            <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_KEY') }}"></div>
+                                        </div>
+                                    @endif
 
                                     <div class="form-group">
-								<div class="aiz-checkbox-list">
-									<label class="aiz-checkbox">
-										<input type="checkbox" name="condition" required>
-											<span class="fs-13">{{ translate('By signing up you agree to our terms and conditions') }}.</span>
-										<span class="aiz-square-check"></span>
-									</label>
-								</div>
-							</div>
+                                        <div class="aiz-checkbox-list">
+                                            <label class="aiz-checkbox">
+                                                <input type="checkbox" name="condition" required>
+                                                <span
+                                                    class="fs-13">{{ translate('By signing up you agree to our terms and conditions') }}.</span>
+                                                <span class="aiz-square-check"></span>
+                                            </label>
+                                        </div>
+                                    </div>
 
                                     <div class="col-12 text-center">
                                         <div class="mb-4">
@@ -118,7 +127,10 @@
                                         </div>
                                     </div>
                                 </form>
-                                @if (\App\Utility\SettingsUtility::get_settings_value('facebook_login_activation_checkbox') == 1 || \App\Utility\SettingsUtility::get_settings_value('twitter_login_activation_checkbox') == 1 || \App\Utility\SettingsUtility::get_settings_value('google_login_activation_checkbox') == 1 || \App\Utility\SettingsUtility::get_settings_value('linkedin_login_activation_checkbox') == 1)
+                                @if (\App\Utility\SettingsUtility::get_settings_value('facebook_login_activation_checkbox') == 1 ||
+                                    \App\Utility\SettingsUtility::get_settings_value('twitter_login_activation_checkbox') == 1 ||
+                                    \App\Utility\SettingsUtility::get_settings_value('google_login_activation_checkbox') == 1 ||
+                                    \App\Utility\SettingsUtility::get_settings_value('linkedin_login_activation_checkbox') == 1)
                                     <div class="col-12 mb-4">
                                         <div class="">
                                             <div class="seperator">
@@ -146,8 +158,8 @@
                                             <div class="mb-4">
                                                 <a href="{{ route('social.login', ['provider' => 'facebook']) }}"
                                                     class="btn  btn-social-login w-100">
-                                                    <img src="{{ asset('templete') }}/src/assets/img/facebook.svg" alt=""
-                                                        class="img-fluid">
+                                                    <img src="{{ asset('templete') }}/src/assets/img/facebook.svg"
+                                                        alt="" class="img-fluid">
                                                 </a>
                                             </div>
                                         </div>
@@ -158,8 +170,8 @@
                                             <div class="mb-4">
                                                 <a href="{{ route('social.login', ['provider' => 'twitter']) }}"
                                                     class="btn  btn-social-login w-100">
-                                                    <img src="{{ asset('templete') }}/src/assets/img/twitter.svg" alt=""
-                                                        class="img-fluid">
+                                                    <img src="{{ asset('templete') }}/src/assets/img/twitter.svg"
+                                                        alt="" class="img-fluid">
                                                 </a>
                                             </div>
                                         </div>
@@ -170,8 +182,8 @@
                                             <div class="mb-4">
                                                 <a href="{{ route('social.login', ['provider' => 'linkedin']) }}"
                                                     class="btn  btn-social-login w-100">
-                                                    <img src="{{ asset('templete') }}/src/assets/img/linkedin.svg" alt=""
-                                                        class="img-fluid">
+                                                    <img src="{{ asset('templete') }}/src/assets/img/linkedin.svg"
+                                                        alt="" class="img-fluid">
                                                 </a>
                                             </div>
                                         </div>

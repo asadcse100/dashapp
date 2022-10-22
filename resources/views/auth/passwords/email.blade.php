@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.blank')
 
 @section('content')
 <div class="py-6">
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-xxl-4 col-xl-5 col-md-7 mx-auto">
                 <div class="card">
@@ -24,7 +24,7 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-4">
+                            <div class="mb-4 mt-2">
                                 <button type="submit" class="btn btn-primary btn-block">{{ translate('Reset Password') }}</button>
                             </div>
 

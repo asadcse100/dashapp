@@ -17,29 +17,34 @@
 
     #navbars ul {
         float: right;
-        margin-right: 20px;
+        margin-right: 60px;
+        margin-top: 13px;
     }
 
     #navbars ul li {
+
         display: inline-block;
-        line-height: 45px;
+        line-height: 35px;
         margin: 0 5px;
+        margin: 0px 15px;
     }
 
     #navbars ul li a {
         color: white;
-        font-size: 15px;
-        padding: 7px 13px;
-        border-radius: 3px;
+        font-size: 20px;
+        /* padding: 7px 13px; */
+        /* border-radius: 3px; */
     }
 
     #navbars ul li a:hover {
         /* color: rgb(26, 45, 96); */
         /* background-color: white; */
-        font-size: 17px;
-        padding: 7px 13px;
-        border-radius: 3px;
+        font-size: 20px;
+        /* padding: 7px 13px; */
+        /* border-radius: 3px; */
         transition: 0.3s;
+        background-color: #05223D;
+        color: aliceblue;
     }
 
     .checkbtn {
@@ -57,6 +62,124 @@
         display: none;
     }
 
+
+    /* torab start*/
+    .my-drpdown-menu {
+        width: 200px;
+
+        position: absolute;
+        right: 220px;
+        background-color: aliceblue;
+
+        display: none;
+        z-index: 9999;
+        border-radius: 3px;
+        padding: 10px 0px;
+
+    }
+
+    .service-drpdown:hover .my-drpdown-menu {
+        display: block;
+    }
+
+
+    .service-drpdown {
+        color: aliceblue;
+        font-size: 20px;
+        /* padding-top: 7px ; */
+        border-radius: 3px;
+        font-size: "20px";
+    }
+
+    .service-drpdown:hover {
+        cursor: pointer;
+        font-size: "20px";
+
+    }
+
+    .my-drpdown-item {
+        display: block;
+        color: black !important;
+        /* padding: 0px 13px !important; */
+        font-size: 20px;
+
+    }
+
+    .my-drpdown-item-a {
+        display: inline-block !important;
+        width: 100%;
+        padding: 2px 13px;
+
+    }
+
+    .my-drpdown-item-a:hover {
+        box-shadow: inset 2px 2px 5px #2F9ACF;
+        color: white !important;
+    }
+
+    .my-drpdown-item a {
+        color: black !important;
+    }
+
+    #navbars {
+        overflow: unset;
+        font-family: "El Messiri SemiBold";
+        font-size: "20px";
+
+    }
+
+    .sub-menu {
+        position: absolute !important;
+        left: 150px;
+        width: 250px;
+        height: 300px;
+        background-color: #193549 !important;
+        /* background-color: aliceblue; */
+        overflow: scroll;
+        display: none;
+        z-index: 9999;
+        border-radius: 3px;
+        padding: 10px 0px;
+
+        /* margin-right:0px !important; */
+        /* padding: 0px 13px !important; */
+    }
+
+
+    .my-drpdown-item:hover .sub-menu {
+        display: inline-block !important;
+    }
+
+    .sub-menu a {
+        color: white !important;
+        font-size: 16px !important;
+
+        display: inline-block !important;
+        color: aliceblue;
+        padding: 2px 13px;
+
+
+    }
+
+    .sub-menu a:hover {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .sub-menu-li {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    /* .sub-menu-li a {
+
+    } */
+
+    .sub-menu-a {}
+
+    /* torab end*/
+
     @media (max-width: 952px) {
         #navbars {
             display: block;
@@ -67,9 +190,38 @@
             padding-left: 20px;
         }
 
-        #navbars ul li a {
+        /* #navbars ul li a {
             font-size: 16px;
+        } */
+    }
+
+    /* torab */
+    @media (max-width: 857px) {
+        .my-drpdown-menu {
+            left: 100px !important;
         }
+
+        .service-drpdown {
+            font-size: 18px;
+        }
+
+        .my-drpdown-item {
+            font-size: 15px !important;
+        }
+
+        .sub-menu {
+            left: 200px !important;
+            width: 130px;
+            margin-left: -50px !important;
+
+        }
+
+        .my-drpdown-item a {
+            font-size: 18px !important;
+        }
+
+
+
     }
 
     @media (max-width: 858px) {
@@ -83,21 +235,6 @@
             display: block;
         }
 
-        @media (max-width: 680px) {
-            .my-drpdown-menu {
-                right: 20px !important;
-            }
-
-            .my-drpdown-item {
-                font-size: 15px !important;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .my-drpdown-menu {
-                right: 0px !important;
-            }
-        }
 
 
         ul {
@@ -115,7 +252,7 @@
 
         #navbars ul li {
             display: block;
-            float: left;
+            /* float: left; */
             /*  margin-left: 0px; */
             /* margin: 30px 0; */
             /* line-height: 20px; */
@@ -130,8 +267,23 @@
         }
     }
 
+    @media (max-width: 490px) {
+        .my-drpdown-menu {
+            right: 0px !important;
+        }
+
+        .my-drpdown-menu {
+            left: 100px !important;
+        }
+    }
+
     #uldesign {
         z-index: 999;
+
+    }
+
+    #navbars ul {
+        text-align: left;
     }
 
     #navbars.fixed {
@@ -152,18 +304,13 @@
 
     #navbars.fixed ul li a {
         transition: 0.5s;
-        font-size: 14px;
+        font-size: 20px;
         color: black;
 
     }
 
     #navbars.fixed ul li a:hover {
         color: black;
-
-
-
-
-
 
     }
 
@@ -175,45 +322,6 @@
         padding-left: 5px;
         padding-top: 1px;
         transition: 0.5s
-    }
-
-    /* torab */
-    .my-drpdown-menu {
-        width: 200px;
-        position: absolute;
-        right: 120px;
-        background-color: aliceblue;
-        overflow: hidden;
-        display: none;
-
-        z-index: 9999;
-        border-radius: 5px;
-    }
-
-    .service-drpdown:hover .my-drpdown-menu {
-        display: block;
-    }
-
-    .service-drpdown {
-        color: aliceblue;
-        font-size: 15px;
-        padding: 7px 13px;
-        border-radius: 3px;
-    }
-
-    .service-drpdown:hover {
-        cursor: pointer;
-    }
-
-    .my-drpdown-item {
-        display: block;
-        color: black !important;
-        padding: 0px 13px !important;
-
-    }
-
-    #navbars {
-        overflow: unset;
     }
 </style>
 
@@ -232,19 +340,37 @@
         <li> <a href="{{ Route('home') }}">Home</a></li>
 
         @php
-            $services = App\Models\ProductCategory::where('status', 1)->get();
+            $services = App\Models\ProductCategory::where('status', 1)
+                ->orderby('order_by')
+                ->get();
+            $servicesubs = App\Models\ProductService::where('status', 1)->get();
         @endphp
 
         {{-- <li> <a href="{{ Route('service') }}">Services</a></li> --}}
 
-
         <li class="service-drpdown">
             Services
             <div class="my-drpdown-menu">
+
                 @foreach ($services as $service)
-                    <a class="my-drpdown-item"
-                        href="{{ route('filter_category', $service->id) }}">{{ $service->name }}</a>
+                    <div class="my-drpdown-item">
+                        <a class="my-drpdown-item-a"
+                            href="{{ route('filter_category', $service->id) }}">{{ $service->name }}</a>
+                        <ul class="sub-menu px-0 py-3">
+                            @php
+                                $filtereds = $servicesubs->where('category_id', $service->id);
+                            @endphp
+                            @if (!empty($filtereds))
+                                @foreach ($filtereds as $key => $filtered)
+                                    <li class="sub-menu-li"><a class="sub-menu-a"
+                                            href="{{ Route('filter_category_with_service', [$service->id, $filtered->id]) }}">{{ $filtered->title }}</a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
                 @endforeach
+
             </div>
         </li>
 
@@ -278,27 +404,4 @@
         }
     }
     window.addEventListener('scroll', fixedNav);
-
-    /* const nav = document.querySelector('#navbars');
-    let navTop = nav.offsetTop;
-    window.onscroll = function () {
-        scrollFunction();
-    };
-
-    function scrollFunction() {
-        if (
-            document.body.scrollTop > 80 ||
-            document.documentElement.scrollTop > 80
-        ) {
-            nav.classList.add('fixed');
-            document.getElementById("navbars").style.padding = "30px 10px";
-            document.getElementById("logo").style.fontSize = "25px";
-        } else {
-            nav.classList.remove('fixed');
-            document.getElementById("navbars").style.padding = "80px 10px";
-            document.getElementById("logo").style.fontSize = "35px";
-        }
-
-    }
-    window.addEventListener('scroll', fixedNav); */
 </script>

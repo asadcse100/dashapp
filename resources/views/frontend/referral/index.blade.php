@@ -77,17 +77,17 @@
                         <div class="widget-content widget-content-area">
                             {{-- {!! Panel::profile_alerts() !!} --}}
                             <div class="seperator-header text-center">
-                                <h4 class="">{{ __('Referral List') }}</h4>
+                                <h4 class="">{{ __('My Referral List') }}</h4>
                             </div>
                             @if (sys_settings('referral_show_referred_users', 'no') == 'yes')
                                 <table class="multi-table table dt-table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
-                                            <th>Username</th>
+                                            <th>Name</th>
                                             <th>Join Date</th>
                                             @if (in_array('earning', sys_settings('referral_user_table_opts', [])))
-                                                <th>Earned</th>
+                                                <th>Referral Income</th>
                                             @endif
                                         </tr>
                                     </thead>
@@ -95,20 +95,19 @@
                                         @foreach ($refers as $key => $refer)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $refer->referred->user_name }}
-                                                </td>
+                                                <td><a href="{{ Route('freelancer.details', $refer->referred->user_name) }}">{{ $refer->referred->name }}</a></td>
                                                 <td>{{ show_date(data_get($refer, 'join_at'), true) }}</td>
-                                                @if (in_array('earning', sys_settings('referral_user_table_opts', [])))
-                                                    <td>{{ isset($earnings[$refer->user_id]) ? money($earnings[$refer->user_id]->sum(), base_currency(), ['dp' => 'calc']) : money('0', base_currency()) }}
-                                                    </td>
-                                                @endif
+                                                    @php
+                                                        $earned = App\Models\Transaction::where('user_id', $refer->user_id)->where('type', 'referral')->sum('amount');
+                                                    @endphp
+                                                    <td>{{ $earned }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             @endif
                             <div class="seperator-header text-center">
-                                <h4 class="">{{ __('Referral Commissions') }}</h4>
+                                <h4 class="">{{ __('My Referral Commissions') }}</h4>
                             </div>
                             <table class="multi-table table table-striped dt-table-hover table-bordered" style="width:100%">
                                 <thead>

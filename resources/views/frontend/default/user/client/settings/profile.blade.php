@@ -316,7 +316,7 @@
                                                             <div class="input-group  mb-3 ">
                                                                 <span class="input-group-text"
                                                                     id="inputGroup-sizing-sm">Postal Code</span>
-                                                                <input type="text" id="postal_code" name="postal_code"
+                                                                <input type="number" id="postal_code" name="postal_code"
                                                                     @if ($user_profile->user->address->postal_code != null) value="{{ $user_profile->user->address->postal_code }}" @endif
                                                                     placeholder="{{ translate('Eg. 1203') }}"
                                                                     class="form-control">

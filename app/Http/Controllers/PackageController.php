@@ -184,15 +184,21 @@ class PackageController extends Controller
     {
         if (Auth::check()) {
             $data = [];
-            if (isClient()) {
-                $data['packages'] = Package::where('type', 'client')->where('active', '1')->get();
-                return view('frontend.default.user.client.package_select', $data);
-            }
-            elseif (isFreelancer()) {
-                $data['packages'] = Package::with('package_extra')->where('type', 'freelancer')->where('active', '1')->get();
+            $userpackage = null;
+            // if (isClient()) {
+            //     $data['packages'] = Package::where('type', 'client')->where('active', '1')->get();
+            //     return view('frontend.default.user.client.package_select', $data);
+            // }
+            // elseif (isFreelancer()) {
+                $userpackage = Auth::user()->userPackage;
+                if(isset($userpackage)){
+                    $data['packages'] = Package::with('package_extra')->whereNotIn('id', [$userpackage->package_id])->where('active', '1')->get();
+                }else{
+                    $data['packages'] = Package::with('package_extra')->where('active', '1')->get();
+                }
                 // $data['packages_extra'] = PackageExtra::
                 return view('frontend.default.user.freelancer.package_select', $data);
-            }
+            // }
         }
         else {
             abort(404);

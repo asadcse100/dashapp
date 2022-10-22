@@ -20,6 +20,7 @@ use App\Models\User;
 use Auth;
 Use Session;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 
 class PackagePaymentController extends Controller
 {
@@ -112,6 +113,7 @@ class PackagePaymentController extends Controller
 
     public function aamarpay_package_payment_done($package_id, $mer_txnid)
     {
+        // dd($package_id);
         $translations_log = Translations_log::where('mer_txnid', $mer_txnid)->first();
         $package = Package::findOrFail($package_id);
         $package_payment = new PackagePayment;
@@ -130,7 +132,6 @@ class PackagePaymentController extends Controller
             if($package->number_of_days > 0){
                 $userPackage->package_invalid_at = date('Y-m-d', strtotime('+ '.$package->number_of_days.'days'));
             }
-
             if ($userPackage->fixed_limit == null) {
                 $userPackage->fixed_limit = $package->fixed_limit;
             }
@@ -154,8 +155,10 @@ class PackagePaymentController extends Controller
 
             $userPackage->save();
             $user = Auth::user();
+
             $user->professional_type_id = $package->professional_type_id;
             $user->save();
+
             // dd($translations_log, $package,$userPackage);
             // Check if reference for this sale set or not in user table
                         // Calculate commision
@@ -173,10 +176,14 @@ class PackagePaymentController extends Controller
 
             $ref_commision = $referral_setting->value;  // 20% commison for Refer by
             $ref_commision_amount = $ref_commision*$package->price/100;
-
+            // dd($package->professional_type_id);
             $userProfile = UserProfile::where('user_id', $referrar_id->user_id)->first();
             $userProfile->balance += $ref_commision_amount;
             $userProfile->save();
+
+            $newUserProfile = UserProfile::where('user_id', $user->id)->first();
+            $newUserProfile->professional_type_id = $package->professional_type_id;
+            $newUserProfile->save();
 
             // try {
             //     $this->check_for_earning_badge($milestone_req->freelancer_user_id);
@@ -199,7 +206,33 @@ class PackagePaymentController extends Controller
                     'status' => 2
                 ]
             );
+
+            //from freelancer/client to admin
+            NotificationUtility::set_notification(
+                "package_purchased",
+                "A new package has been purchased by",
+                route('package_payment_history_for_admin',[],false),
+                0,
+                Auth::user()->id,
+                'admin'
+            );
+           $login =  Auth::loginUsingId(Auth::user()->id);
+           return;
+        //    dd($login);
+            // Refferal payment
+            // dd('with reffral code', $package_id, $mer_txnid);
+
+                        // Redirect::to('/')->with(Auth::logout());
+            // dd(route('referral'));
+                        // return redirect()->route('home')->with(Auth::logout());
+                        // return view('frontend.default.user.freelancer.dashboard');
+            // return back();
         }
+
+        $newUserProfile = UserProfile::where('user_id', $user->id)->first();
+        $newUserProfile->professional_type_id = $package->professional_type_id;
+        $newUserProfile->save();
+
             //from freelancer/client to admin
             NotificationUtility::set_notification(
                 "package_purchased",
@@ -210,6 +243,10 @@ class PackagePaymentController extends Controller
                 'admin'
             );
 
+            Auth::loginUsingId(Auth::user()->id);
+            return;
+
+            // dd('without refferal code', $package_id, $mer_txnid, $refer_user,$request->opt_b,Auth::check(), Auth::user());
             // EmailUtility::send_email(
             //     "A new package has been purchased",
             //     "A new package has been purchased by ". Auth::user()->name,
@@ -219,8 +256,9 @@ class PackagePaymentController extends Controller
 
             // Session::forget('payment_data');
             // flash('Payment has been done successfully')->success();
-
-            return redirect()->route('dashboard');
+            // return back();
+            // return redirect()->route('dashboard');
+            // return view('frontend.default.user.freelancer.dashboard');
 
         }
     }

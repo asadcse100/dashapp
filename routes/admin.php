@@ -10,6 +10,23 @@ Route::get('/update/step1', 'UpdateController@step1')->name('update.step1');
 Route::get('/update/step2', 'UpdateController@step2')->name('update.step2');
 
 Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'admin']], function(){
+	    // For the Lawyer package
+    Route::resource('/act-setup', 'ActSetupController');
+	Route::get('act-setup/destroy/{id}', 'ActSetupController@destroy')->name('act_setup.destroy');
+
+	Route::resource('/lawyer-court', 'LawyerCourtController');
+	Route::get('lawyer/destroy/{id}', 'LawyerCourtController@destroy')->name('lawyer.court.destroy');
+
+	Route::resource('/lawyer_setup', 'LawyerController');
+	Route::get('lawyer_setup/destroy/{id}', 'LawyerController@destroy')->name('lawyer_setup.destroy');
+
+	Route::resource('/court-category', 'LawyerCourtCategoryController');
+	Route::get('court-category/destroy/{id}', 'LawyerCourtCategoryController@destroy')->name('court_setup.destroy');
+
+	Route::resource('/case', 'LawyerCaseController');
+	Route::get('case/destroy/{id}', 'LawyerCaseController@destroy')->name('case.destroy');
+    // Lawyer package end
+
     Route::get('/admin', 'HomeController@admin_dashboard')->name('admin.dashboard');
 	Route::get('profile', 'ProfileController@admin_profile')->name('admin.profile');
 	Route::post('profile-update/{id}', 'ProfileController@update_admin_profile')->name('admin_profile.update');
@@ -18,7 +35,7 @@ Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'admin']], function()
     Route::post('update/referral', 'ReferralController@update')->name('update.referral');
 
 	Route::resource('/project-categories', 'ProjectCategoryController');
-	Route::get('/project-categories/destroy/{id}', 'ProjectCategoryController@destroy')->name('project-categories.destroy');
+	Route::get('project-categories/destroy/{id}', 'ProjectCategoryController@destroy')->name('project-categories.destroy');
 
 	Route::resource('skills','SkillController');
 	Route::get('/skills/destroy/{id}', 'SkillController@destroy')->name('skills.destroy');

@@ -21,4 +21,9 @@ class UserProfile extends Model
     {
         return $this->belongsTo(ProjectCategory::class, 'specialist')->withTrashed();
     }
+
+    public function ProfessionalType()
+    {
+        return $this->belongsTo(ProfessionalType::class);
+    }
 }

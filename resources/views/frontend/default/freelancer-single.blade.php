@@ -94,8 +94,8 @@
                                         <span>{{ translate('per Hour') }}</span>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary"
-                                    href="{{ route('invition_for_hire_freelancer', $freelancer->user_name) }}">{{ translate('Hire Me') }}</a>
+                                {{-- <a class="btn btn-primary"
+                                    href="{{ route('invition_for_hire_freelancer', $freelancer->user_name) }}">{{ translate('Hire') }}</a> --}}
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,42 @@
         <div class="container">
             <div class="row gutters-10">
                 <div class="col-xxl-9 col-lg-8 order-1 order-lg-0">
+                    <div class="card my-2">
+                        <div class="card-header">
+                            <h4 class="h6 fw-600 mb-0">{{ $freelancer->name }}'s {{ translate('Services') }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row gutters-10">
+                                @foreach ($freelancer->services as $service)
+                                    <div class="col-lg-4 my-2">
+                                        <div class="card border-dark">
+                                            <a href="{{ route('service.show', $service->slug) }}">
+                                                @if (!empty($service->image))
+                                                    <img src="{{ asset('storage/uploads/services/' . $service->image) }}"
+                                                        class="card-img-top" alt="{{ $service->slug }}" height="160">
+                                                @else
+                                                    <img class="card-img-top"
+                                                        src="{{ asset('assets/frontend/default/img/hotel/room/3.jpg') }}">
+                                                @endif
+                                            </a>
+                                            <div class="card-body">
 
+                                                <a href="{{ route('service.show', $service->slug) }}" class="text-dark">
+                                                    <p class="card-title">
+                                                        {{ \Illuminate\Support\Str::words($service->title, 7, $end = '...') }}
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="card-footer justify-content-between">
+                                                <span>Starting at
+                                                    @if(isset($service->service_packages)){{ single_price($service->service_packages[0]->service_price) }}@endif</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h4 class="h6 fw-600 mb-0">{{ $freelancer->name }}'s {{ translate('Bio') }}</h4>
@@ -183,42 +218,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card my-2">
-                        <div class="card-header">
-                            <h4 class="h6 fw-600 mb-0">{{ $freelancer->name }}'s {{ translate('Services') }}</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row gutters-10">
-                                @foreach ($freelancer->services as $service)
-                                    <div class="col-lg-4">
-                                        <div class="card border-dark">
-                                            <a href="{{ route('service.show', $service->slug) }}">
-                                                @if (!empty($service->image))
-                                                    <img src="{{ asset('storage/uploads/services/' . $service->image) }}"
-                                                        class="card-img-top" alt="{{ $service->slug }}" height="212">
-                                                @else
-                                                    <img class="card-img-top"
-                                                        src="{{ asset('assets/frontend/default/img/hotel/room/3.jpg') }}">
-                                                @endif
-                                            </a>
-                                            <div class="card-body">
 
-                                                <a href="{{ route('service.show', $service->slug) }}" class="text-dark">
-                                                    <h5 class="card-title">
-                                                        {{ \Illuminate\Support\Str::limit($service->title, 40, $end = '...') }}
-                                                    </h5>
-                                                </a>
-                                            </div>
-                                            <div class="card-footer justify-content-between">
-                                                <span>STARTING AT
-                                                    {{ single_price($service->service_packages[0]->service_price) }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="card my-2">
                         <div class="card-header">
@@ -375,13 +375,16 @@
                                     @if ($freelancer->profile->skills != null)
                                         @foreach (json_decode($freelancer->profile->skills, true) as $key => $skill_id)
                                             @php
-                                                $skill = \App\Models\Skill::find($skill_id);
+                                                $skills = \App\Models\Skill::find($skill_id);
                                             @endphp
-                                            @if ($skill)
-                                                <div class="btn-group" role="group" aria-label="Default button group">
-                                                    <button type="button"
-                                                        class="btn btn-outline-dark btn-sm p-1">{{ $skill->name }}</button>
-                                                </div>
+                                            @if ($skills)
+                                                @foreach ($skills as $skill)
+                                                    <div class="btn-group" role="group"
+                                                        aria-label="Default button group">
+                                                        <button type="button"
+                                                            class="btn btn-outline-dark btn-sm p-1">{{ $skill->name }}</button>
+                                                    </div>
+                                                @endforeach
                                                 {{-- <span class="btn btn-outline btn-xs mb-1">{{ $skill->name }}</span> --}}
                                             @endif
                                         @endforeach
@@ -464,7 +467,7 @@
                             <a class="btn btn-block btn-outline-primary"
                                 href="{{ route('bookmarked-freelancers.store', encrypt($freelancer->id)) }}">
                                 <i class="las la-bookmark"></i>
-                                <span>{{ translate('Bookmark Freelancer') }}</span>
+                                <span>{{ translate('Bookmark Expert') }}</span>
                             </a>
                         @endif
                     </div>

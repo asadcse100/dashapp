@@ -65,6 +65,51 @@
             max-width: 80%;
             margin: 20px auto;
         }
+        /**********************************/
+/********* Team #9 Style **********/
+/**********************************/
+.team-9 {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+
+
+.team-9 .team-img {
+    position: relative;
+    font-size: 0;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.team-9 .team-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+}
+
+.team-9 .team-content {
+    text-align: center;
+}
+
+.team-9 .team-content h2 {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.team-9 .team-content h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+
     </style>
 @endsection
 
@@ -84,271 +129,229 @@
             </div>
             <!-- /BREADCRUMB -->
             <div class="row layout-top-spacing">
-                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                    <div id="wizard_Default">
-                        <div class="statbox widget box box-shadow">
-                            <div class="widget-content widget-content-area">
-                                <div class="bs-stepper stepper-form-one">
-                                    <div class="bs-stepper-header" role="tablist">
-                                        <div class="step" data-target="#defaultStep-one">
-                                            <button type="button" class="step-trigger" role="tab">
-                                            </button>
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                    <form action="{{ route('matter') }}" method="GET" name="share_matter" id="share_matter">
+                        <div class="row">
+                            <div class="col-sm-4 mb-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"
+                                        id="inputGroup-sizing-sm">I Need</span>
+                                    <select class="form-select aiz-selectpicker"
+                                        name="category_id" id="category_id">
+                                        <option value="-1">Select</option>
+                                        @foreach (\App\Models\ProductCategory::where('status', 1)->orderby('order_by')->get() as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="skill" id="skill" value="-1">
+                            <input type="hidden" name="sub_category_id" value="-1">
+                            {{-- When need than open this section  --}}
+                            {{-- <div class="col-sm-4 mb-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"
+                                        id="inputGroup-sizing-sm">More Specific</span>
+                                    <select class="form-select aiz-selectpicker"
+                                        name="sub_category_id" id="sub_category_id">
+                                    <option value="-1">Select</option>
+                                    </select>
+                                </div>
+                            </div> --}}
+
+                            <div class="col-sm-2 mb-4">
+                                <div class="input-group mb-3">
+                                    <select class="form-select aiz-selectpicker" name="service_or_provider">
+                                    <option value="service">Services</option>
+                                    <option value="service_provider">Service Provider</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-secondary">Show</button>
+                            </div>
+                    </div>
+                    </form>
+
+                        <div class="row gutters-10">
+                            {{-- <div class="col-xl-3 col-lg-4">
+                                <div class="aiz-filter-sidebar collapse-sidebar-wrap sidebar-lg">
+                                    <div class="card rounded-0 rounded-lg collapse-sidebar c-scrollbar-light">
+                                        <div class="card-header">
+                                            <h5 class="mb-0 h6">{{ translate('Filter By') }}</h5>
                                         </div>
-                                        <div class="step" data-target="#defaultStep-three">
-                                            <button type="button" class="step-trigger" role="tab">
-                                            </button>
+                                        <div class="card-body">
+                                            @if(isset($skills))
+                                            @foreach ($skills as $key=>$skill)
+
+                                                @if($key%8 == 1)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-warning mb-1 py-0">{{ $skill->name }}</a>
+                                                    @elseif ($key%8 == 2)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-primary mb-1 py-0">{{ $skill->name }}</a>
+                                                    @elseif ($key%8 == 3)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-secondary mb-1 py-0">{{ $skill->name }}</a>
+                                                    @elseif ($key%8 == 4)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-success mb-1 py-0">{{ $skill->name }}</a>
+                                                    @elseif ($key%8 == 5)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-danger mb-1 py-0">{{ $skill->name }}</a>
+                                                    @elseif ($key%8 == 6)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-info mb-1 py-0">{{ $skill->name }}</a>
+                                                    @elseif ($key%8 == 7)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-info mb-1 py-0">{{ $skill->name }}</a>
+                                                    @elseif ($key%8 == 8)
+                                                    <a href="javascript:skill_click({{ "'". $skill->name."'" }});" id="{{ $skill->name }}" class="btn btn-outline-dark mb-1 py-0">{{ $skill->name }}</a>
+                                                   @endif
+
+                                            @endforeach
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="bs-stepper-content">
-                                        <div id="defaultStep-one" class="content" role="tabpanel">
-                                            <form class="row g-3">
-                                                <div class="col-sm-6">
-                                                    <label for="defaultInputAddress" class="form-label">Matter
-                                                        Title</label>
-                                                    <input type="text" class="form-control" id="defaultInputAddress2"
-                                                        placeholder="Enter your matter title">
+                                    <div class="overlay overlay-fixed dark c-pointer" data-toggle="class-toggle"
+                                        data-target=".aiz-filter-sidebar" data-same=".filter-sidebar-thumb"></div>
+                                </div>
+                            </div> --}}
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="">
+                                    <input type="hidden" name="type" value="freelancer">
+                                    <div class="">
+                                        {{-- <div class="d-flex align-items-center">
+                                        <button class="btn btn-sm btn-icon btn-soft-secondary d-lg-none flex-shrink-0 mr-2"
+                                            data-toggle="class-toggle" data-target=".aiz-filter-sidebar" type="button">
+                                            <i class="las la-filter"></i>
+                                        </button>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Search Keyword"
+                                            name="keyword" value="{{ $keyword }}">
+                                    </div> --}}
+                                    </div>
+                                    <div class="row gutters-10">
+                                        <div class="card-body p-0">
+                                            <div class="faq container">
+                                                <div class="row">
+                                                    @if(isset($services))
+                                                    @forelse ($services as $service)
+                                                        
+                                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+                                                            <div class="card">
+                                                            <a class="card style-6" href="{{ route('service.show', $service->slug) }}">
+                                                                @if (!empty($service->image))
+                                                                <img src="{{ asset('storage/uploads/services/' . $service->image) }}"
+                                                                    class="card-img-top ser-img" height="200"
+                                                                    alt="{{ asset($service->slug) }}">
+                                                            @else
+                                                                <img src="{{ asset('templete') }}/src/assets/img/dummy-post-horisontal.jpg"
+                                                                    alt="Team Image"
+                                                                    style="height: 200px;">
+                                                            @endif
+                                                                <div class="card-footer">
+                                                                    <div class="row">
+                                                                        <div class="col-12 mb-4">
+                                                                            <a href="{{ route('freelancer.details', $service->user->user_name) }}">
+                                                                                <div class="media">
+                                                                                    @if (!empty($service->user->photo))
+                                                                                        <img src="{{ asset('profile/photos/' . $service->user->photo) }}"
+                                                                                            class="card-media-image me-3"
+                                                                                            alt="{{ $service->user->photo }}" style="height: 45px; width: 45px">
+                                                                                    @else
+                                                                                        <img src="{{ asset('assets/frontend/default/img/avatar-place.png') }}"
+                                                                                            class="card-media-image me-3" alt="">
+                                                                                    @endif
+                                                                                    <div class="media-body">
+                                                                                        <p class="media-heading mt-3">
+                                                                                            {{ $service->user->name }}</p>
+                                                                                    </div>
+                                                                                </div>
 
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label for="defaultInputAddress2" class="form-label">Matter
-                                                        Category</label>
-                                                    <select id="defaultInputState" class="form-select">
-                                                        <option selected="">Choose...</option>
-                                                        <option>...</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-12">
-                                                    <label for="defaultInputCity" class="form-label">Matter
-                                                        Details</label>
-                                                    <textarea id="about_service" name="about_service" rows="40" cols="50"> </textarea>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="defaultInputState" class="form-label">Matter
-                                                        Image</label>
-                                                    <input type="file" class="form-control" type="file"
-                                                        name="service_photo" aria-label="Sizing example input"
-                                                        aria-describedby="inputGroup-sizing-sm">
-                                                </div>
-
-
-                                            </form>
-
-                                            <div class="button-action mt-5">
-                                                <button class="btn btn-secondary btn-prev me-3" disabled>Prev</button>
-                                                <button class="btn btn-secondary btn-nxt">Next</button>
-                                            </div>
-                                        </div>
-
-                                        <div id="defaultStep-three" class="content" role="tabpanel">
-                                            <form class="row g-3">
-                                                <div class="col-md-4">
-                                                    <label for="defaultInputState" class="form-label">Expert List</label>
-                                                    <select id="defaultInputState" class="form-select">
-                                                        <option selected="">Choose...</option>
-                                                        <option>...</option>
-                                                    </select>
-                                                </div>
-                                            </form>
-                                            <div class="row">
-                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="card col-md-2 m-2">
-                                                            <div class="card-top-content text-center">
-                                                                <div class="avatar avatar-xl my-2">
-                                                                    <img alt="avatar"
-                                                                        src="{{ asset('templete') }}/src/assets/img/robin(1).jpg"
-                                                                        class="rounded-circle">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="col-12 text-center">
+                                                                            <div class="pricing d-flex">
+                                                                                <a href="{{ route('service.show', $service->slug) }}"
+                                                                                    class="text-dark">
+                                                                                    <p class="card-title" style="text-align: justify">
+                                                                                        {{ \Illuminate\Support\Str::limit($service->title, 50, $end = '...') }}
+                                                                                    </p>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="card-body  text-center">
-                                                                <h5 class="card-title">Card title</h5>
-                                                                <p class="mb-0">This is some text within a card body.</p>
-                                                            </div>
-                                                            <div class="card-footer pt-0 border-0 text-center">
-                                                                <a type="button" data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal-xl">
-                                                                    Expertness
+                                                            </a>
+                                                        </div>
+                                                        </div>
+                                                        @empty
+                                                        <h4>No Service found or select from "I Need"</h4>
+                                                    @endforelse
+                                                    @endif
+
+                                                    @if(isset($user_profile))
+                                                    @forelse ($user_profile as $profile)
+                                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+                                                                <div class="team-9 card">
+                                                                    <div class="team-img">
+                                                                        <a href="{{ route('freelancer.details', $profile->user->user_name) }}">
+                                                                            @if (!empty($profile->user->photo))
+                                                                                <img src="{{ asset('profile/photos/' . $profile->user->photo) }}"
+                                                                                    class="card-img-top"
+                                                                                    alt="{{ asset($profile->user->photo) }}" style="height: 150px; width:150px">
+                                                                            @else
+                                                                                <img src="{{ asset('templete') }}/src/assets/img/dummy-post-horisontal.jpg"
+                                                                                    alt="Team Image"
+                                                                                    style="height: 150px; width:150px">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="team-content">
+                                                                        <h5>{{ $profile->user->name }}</h5>
+                                                                    <h6 class="text-success">{{ $profile->ProfessionalType->name }}</h6>
+                                                                    <p>Consultant Fee: &#2547 {{ $profile->consultant_fee }}</p>
+                                                                    <p>Hourly Rate: &#2547 {{ $profile->hourly_rate }}</p>
+                                                                    <a href="{{ route('freelancer.details', $profile->user->user_name) }}">
+                                                                    <button class="text-center btn btn-info btn sm">Get More</button>
                                                                 </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card col-md-2 m-2">
-                                                            <div class="card-top-content text-center">
-                                                                <div class="avatar avatar-xl my-2">
-                                                                    <img alt="avatar"
-                                                                        src="{{ asset('templete') }}/src/assets/img/robin(1).jpg"
-                                                                        class="rounded-circle">
+                                                                    </div>
+                                                                    {{-- <div class="team-overlay">
+                                                                        <div class="team-img">
+                                                                            <a href="{{ route('freelancer.details', $profile->user->user_name) }}">
+                                                                                @if (!empty($profile->user->photo))
+                                                                                    <img src="{{ asset('profile/photos/' . $profile->user->photo) }}"
+                                                                                        class="card-img-top"
+                                                                                        alt="{{ asset($profile->user->photo) }}"  style="height: 150px; width:150px">
+                                                                                @else
+                                                                                    <img src="{{ asset('templete') }}/src/assets/img/dummy-post-horisontal.jpg"
+                                                                                        alt="Team Image"
+                                                                                        style="height: 150px; width:150px">
+                                                                                @endif
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <h5>{{ $profile->user->name }}</h5>
+                                                                        <h6 class="text-success">{{ $profile->ProfessionalType->name }}</h6>
+
+                                                                       <p> {{ \Illuminate\Support\Str::limit( $profile->bio, 48, $end = '...') }}</p>
+                                                                        <a href="{{ route('freelancer.details', $profile->user->user_name) }}">
+                                                                            <button class="text-center btn btn-info btn sm">Get More</button>
+                                                                        </a>
+                                                                    </div> --}}
                                                                 </div>
-                                                            </div>
-                                                            <div class="card-body  text-center">
-                                                                <h5 class="card-title">Card title</h5>
-                                                                <p class="mb-0">This is some text within a card body.</p>
-                                                            </div>
-                                                            <div class="card-footer pt-0 border-0 text-center">
-                                                                <a type="button" data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal-xl">
-                                                                    Expertness
-                                                                </a>
-                                                            </div>
+
                                                         </div>
-                                                    </div>
+
+                                                        @empty
+                                                        <h4>No Service found or select from "I Need"</h4>
+                                                    @endforelse
+                                                    @endif
                                                 </div>
-                                            </div>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal-xl" tabindex="-1" role="dialog"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <div class="col-12">
-                                                                <div class="row">
-                                                                    <div class="col-md-12 text-center">
-                                                                        <div class="avatar avatar-xl my-2">
-                                                                            <img alt="avatar"
-                                                                                src="{{ asset('templete') }}/src/assets/img/robin(1).jpg"
-                                                                                class="rounded-circle">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12 text-center">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            BRIT ROBIN
-                                                                        </h5>
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Lawyer
-                                                                        </h5>
-                                                                        <h6 class="modal-title" id="exampleModalLabel">
-                                                                            Complete Project (50) <span>4.5*</span>
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                                                                <div class="info">
-                                                                    <h6 class="">Work Experience</h6>
-                                                                    <hr>
-
-                                                                    <div class="my-3">
-                                                                        <div class="row gutters-10">
-                                                                            <div class="col-md-4 p-2">
-                                                                                <div class="card br-8">
-                                                                                    <div class="card-body">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-9">
-                                                                                                <h4 class="h6 mb-1">
-                                                                                                    test
-                                                                                                </h4>
-                                                                                                <ul
-                                                                                                    class="list-unstyled text-secondary mb-0">
-                                                                                                    <li
-                                                                                                        class="text-primary">
-                                                                                                        zeroplus
-                                                                                                    </li>
-
-                                                                                                    <li>Dhaka
-                                                                                                    </li>
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                                                                <div class="info">
-                                                                    <h6 class="">Educational Information</h6>
-                                                                    <hr>
-
-                                                                    <div class="my-3">
-                                                                        <div class="row gutters-10">
-                                                                            <div class="col-md-4 p-2">
-                                                                                <div class="card br-8">
-                                                                                    <div class="card-body">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-9">
-                                                                                                <h4 class="h6 mb-1">
-                                                                                                    BSc
-                                                                                                </h4>
-                                                                                                <ul
-                                                                                                    class="list-unstyled text-secondary mb-0">
-                                                                                                    <li
-                                                                                                        class="text-primary">
-                                                                                                        University: DIU
-                                                                                                    </li>
-
-                                                                                                    <li>Pasing Year: 2008
-                                                                                                    </li>
-                                                                                                    <li>Country: Bangladesh
-                                                                                                    </li>
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                                                                <div class="info">
-                                                                    <h6 class="">Portfolio Information</h6>
-                                                                    <hr>
-
-                                                                    <div class="my-3">
-                                                                        <div class="row gutters-10">
-                                                                            <div class="col-md-4 p-2">
-                                                                                <div class="card">
-                                                                                    <div class="card-body">
-                                                                                        <div class="row">
-                                                                                            <img class="img-fit mw-100"
-                                                                                                src="{{ asset('templete') }}/src/assets/img/robin(1).jpg"
-                                                                                                height="240">
-                                                                                            <hr>
-                                                                                            <h4 class="h6 mb-1">
-                                                                                                Test
-                                                                                            </h4>
-                                                                                            <ul
-                                                                                                class="list-unstyled text-secondary mb-0">
-                                                                                                <li class="text-primary">
-                                                                                                    The test Title for
-                                                                                                    portfolio
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn" data-bs-dismiss="modal"><i
-                                                                    class="flaticon-cancel-12"></i> Discard</button>
-                                                            <button type="button" class="btn btn-primary">Save</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="button-action mt-3">
-                                                <button class="btn btn-secondary btn-prev me-3">Prev</button>
-                                                <button class="btn btn-success me-3">Submit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -383,111 +386,6 @@
 
     {{-- <script src="{{ asset('zeroplus') }}/zeroplusckeditor.js"></script> --}}
     <script type="text/javascript">
-        class MyUploadAdapter {
-            constructor(loader) {
-                this.loader = loader;
-            }
-
-            upload() {
-                return this.loader.file
-                    .then(file => new Promise((resolve, reject) => {
-                        this._initRequest();
-                        this._initListeners(resolve, reject, file);
-                        this._sendRequest(file);
-                    }));
-            }
-
-            abort() {
-                if (this.xhr) {
-                    this.xhr.abort();
-                }
-            }
-
-            _initRequest() {
-                const xhr = this.xhr = new XMLHttpRequest();
-                console.log("{{ route('image-upload', ['_token' => csrf_token()]) }}");
-                xhr.open('POST', '{{ route('image-upload', ['_token' => csrf_token()]) }}', true);
-                xhr.responseType = 'json';
-            }
-
-            _initListeners(resolve, reject, file) {
-                const xhr = this.xhr;
-                const loader = this.loader;
-                const genericErrorText = `Couldn't upload file: ${ file.name }.`;
-
-                xhr.addEventListener('error', () => reject(genericErrorText));
-                xhr.addEventListener('abort', () => reject());
-                xhr.addEventListener('load', () => {
-                    const response = xhr.response;
-
-                    if (!response || response.error) {
-                        return reject(response && response.error ? response.error.message : genericErrorText);
-                    }
-
-                    resolve(response);
-                });
-
-                if (xhr.upload) {
-                    xhr.upload.addEventListener('progress', evt => {
-                        if (evt.lengthComputable) {
-                            loader.uploadTotal = evt.total;
-                            loader.uploaded = evt.loaded;
-                        }
-                    });
-                }
-            }
-
-            _sendRequest(file) {
-                const data = new FormData();
-
-                data.append('upload', file);
-
-                this.xhr.send(data);
-            }
-        }
-
-        function MyCustomUploadAdapterPlugin(editor) {
-            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-                return new MyUploadAdapter(loader);
-            };
-        }
-
-
-
-        // ClassicEditor
-        //         .create( $( '#about_service' ), {
-        //             extraPlugins: [ MyCustomUploadAdapterPlugin ],
-        //         } )
-        //         .catch( error => {
-        //             console.error( error );
-        //         } );
-
-        ClassicEditor.create(document.querySelector('#about_service'), {
-                extraPlugins: [MyCustomUploadAdapterPlugin]
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-        ClassicEditor
-            .create(document.querySelector('#basic_included_description'))
-            .catch(error => {
-                console.error(error);
-            });
-
-        ClassicEditor
-            .create(document.querySelector('#standard_included_description'))
-            .catch(error => {
-                console.error(error);
-            });
-
-        ClassicEditor
-            .create(document.querySelector('#premium_included_description'))
-            .catch(error => {
-                console.error(error);
-            });
-
-
 
         function get_category_by_subcategory() {
             var category_id = $('#category_id').val();
@@ -496,7 +394,17 @@
                 _token: '{{ csrf_token() }}',
                 category_id: category_id
             }, function(data) {
-                $('#sub_category_id').html(null);
+                $('#sub_category_id option').remove();
+
+                $('#sub_category_id').append($('<option>', {
+                        value: -1,
+                        text: 'Select'
+                    }));
+
+                $('#sub_category_id').append($('<option>', {
+                        value: -2,
+                        text: 'All'
+                    }));
                 for (var i = 0; i < data.length; i++) {
                     $('#sub_category_id').append($('<option>', {
                         value: data[i].id,
@@ -520,5 +428,13 @@
         $('#category_id').on('change', function() {
             get_category_by_subcategory();
         });
-    </script>
+
+        function skill_click(id){
+
+            $('#skill').val(id);
+            console.log(id,$('#skill').val());
+            $('#share_matter').submit();
+
+        }
+     </script>
 @endsection

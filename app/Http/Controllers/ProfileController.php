@@ -123,6 +123,16 @@ class ProfileController extends Controller
         }
     }
 
+    public function passupdate(Request $request)
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        if($request->new_password != null && ($request->new_password == $request->confirm_password)){
+            $user->password = Hash::make($request->new_password);
+        }
+        $user->save();
+        return back();
+    }
+
     public function user_update(Request $request)
     {
         $user = User::find(Auth::user()->id);

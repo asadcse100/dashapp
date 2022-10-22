@@ -2,9 +2,9 @@
     // navbar
     let bar = document.querySelector('.mob-box');
     let mobLinks = document.querySelector('.link-box')
-    bar.onclick = () => {
-        mobLinks.classList.toggle('active');
-    }
+    // bar.onclick = () => {
+    //     mobLinks.classList.toggle('active');
+    // }
     //navbar end
 
     /* Sticky nav start */

@@ -23,15 +23,19 @@
     <link href="{{ asset('templete') }}/src/assets/css/light/pages/faq.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templete') }}/src/assets/css/dark/pages/faq.css" rel="stylesheet" type="text/css" />
 @endsection
-
+<style>
+    .pricing-table-2 .pricing-plan .pricing-header-section .pricing-header-pricing {
+        max-width: 138px !important;
+    }
+</style>
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
     <div class="layout-px-spacing" style="margin-top: 50px">
         <div class="middle-content container-xxl p-0">
             <div class="col-md-4   layout-top-spacing">
-                <h5 class="mb-md-0 h6">{{ translate('Reviews') }}</h5>
+                <h5 class="mb-md-0 h6">{{ translate('Package-Select') }}</h5>
             </div>
-            <div class="col-12">
+            <div class="col-xxl-12 col-xl-12 col-lg-12col-md-12 col-sm-12">
                 <div class="row" id="cancel-row">
                     @foreach ($packages as $key => $package)
                         <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-6 layout-top-spacing">
@@ -65,7 +69,7 @@
                                             {{-- <span class="badge badge-pill badge-warning show">0% Off</span> --}}
 
                                             <div class="pricing-header-section">
-                                                <div class="pricing-header">
+                                                <div class="pricing-header-pricing">
                                                     <h5 class="mb-3 h5 fw-600">
                                                         {{ $package->name }}</h5>
                                                     @if ($package->recommended != 0)
@@ -92,10 +96,25 @@
                                             </div>
                                             <div class="accordion" id="simple_faq{{ $package->id }}">
                                                 <div id="fqheadingOne{{ $package->id }}">
+                                                    <div class="text-center">
+                                                        @if ($package->price == '0.00')
+                                                            <a href="{{ route('package_purchase_free', $package->id) }}"
+                                                                @if ($package->recommended == 0) class="btn btn-success"
+                                                    @else
+                                                    class="btn btn-success" @endif>{{ translate('Start Free Trial') }}</a>
+                                                        @else
+                                                            <button type="submit" id="btn_id{{ $package->id }}"
+                                                                name="btn_id{{ $package->id }}"
+                                                                @if ($package->recommended == 0) class="btn btn-outline-secondary"
+                                                    @else
+                                                    class="btn btn-success" @endif>{{ translate('Purchase This Package') }}
+                                                            </button>
+                                                        @endif
+                                                    </div>
                                                     <div class="mb-0 text-center" data-bs-toggle="collapse"
                                                         role="navigation" data-bs-target="#fqcollapseOne"
                                                         aria-expanded="false" aria-controls="fqcollapseOne">
-                                                        <span style="color: rgb(5, 57, 199)">More
+                                                        <span style="color: rgb(255, 6, 122)">More
                                                             Info</span>
                                                         <div class="icons"><svg xmlns="http://www.w3.org/2000/svg"
                                                                 width="24" height="24" viewBox="0 0 24 24"
@@ -129,6 +148,7 @@
                                                                         @endif
                                                                         {{ translate('Commission') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->fixed_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -144,6 +164,7 @@
                                                                         {{ $package->fixed_limit }}
                                                                         {{ translate('Fixed Project Bids') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->long_term_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -158,6 +179,7 @@
                                                                             </svg></span> {{ $package->long_term_limit }}
                                                                         {{ translate('Long Term Project Bids') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->portfolio_add_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -173,6 +195,7 @@
                                                                         {{ $package->portfolio_add_limit }}
                                                                         {{ translate('Portfolio Adding Limit') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->skill_add_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -188,6 +211,7 @@
                                                                         {{ $package->skill_add_limit }}
                                                                         {{ translate('Skills Adding Limit') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->bookmark_project_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -203,6 +227,7 @@
                                                                         {{ $package->bookmark_project_limit }}
                                                                         {{ translate('Project Bookmark Limit') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->job_exp_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -218,6 +243,7 @@
                                                                         {{ $package->job_exp_limit }}
                                                                         {{ translate('Experience Add Limit') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->service_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -233,6 +259,7 @@
                                                                         {{ $package->service_limit }}
                                                                         {{ translate('Service Add Limit') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @if (!empty($package->bio_text_limit))
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -248,6 +275,7 @@
                                                                         {{ $package->bio_text_limit }}
                                                                         {{ translate('Bio Words Limit') }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endif
                                                                 @foreach ($package->package_extra as $package_extra)
                                                                     <li><span><svg xmlns="http://www.w3.org/2000/svg"
@@ -262,6 +290,7 @@
                                                                             </svg></span>
                                                                         {{ $package_extra->pack_text }}
                                                                     </li>
+                                                                    <hr>
                                                                 @endforeach
                                                                 <li><span><svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="24" height="24"
@@ -277,6 +306,7 @@
                                                                         {{ translate('Client Following') }}
                                                                     @endif
                                                                 </li>
+                                                                <hr>
                                                             </ul>
                                                         </div>
                                                         <div class="text-center">
@@ -290,7 +320,7 @@
                                                                     name="btn_id{{ $package->id }}" {{-- @if (\App\Addon::where('unique_identifier', 'offline_payment')->first() != null && \App\Addon::where('unique_identifier', 'offline_payment')->first()->activated) onclick="select_payment_type({{ $package->id }})"
                                                         @else
                                                             onclick="online_payment({{ $package->id }})" @endif --}}
-                                                                    @if ($package->recommended == 0) class="btn btn-primary"
+                                                                    @if ($package->recommended == 0) class="btn btn-outline-secondary"
                                                         @else
                                                         class="btn btn-success" @endif>{{ translate('Purchase This Package') }}
                                                                 </button>

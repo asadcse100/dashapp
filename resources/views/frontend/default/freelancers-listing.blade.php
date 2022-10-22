@@ -221,7 +221,7 @@
                                                                         <div>
                                                                             @foreach (json_decode($freelancer->skills) as $key => $skill_id)
                                                                                 @php
-                                                                                    $skill = \App\Models\Skill::find($skill_id);
+                                                                                    $skill = \App\Models\Skill::find($skill_id->value);
                                                                                 @endphp
                                                                                 @if ($skill != null)
                                                                                     <span

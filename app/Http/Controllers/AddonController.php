@@ -237,4 +237,10 @@ class AddonController extends Controller
         return redirect('/dashboard');
     }
 
+    public function manualLoginShareMatter($id){
+
+        Auth::loginUsingId($id);
+        return redirect('/matter-indexonly');
+    }
+
 }

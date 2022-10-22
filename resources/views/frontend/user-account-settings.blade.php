@@ -129,8 +129,8 @@
                                                             <div class="profile-image  mt-4 pe-md-4">
 
                                                                 <!-- // The classic file input element we'll enhance
-                                                                                        // to a file pond, we moved the configuration
-                                                                                        // properties to JavaScript -->
+                                                                                            // to a file pond, we moved the configuration
+                                                                                            // properties to JavaScript -->
 
                                                                 <div class="img-uploader-content">
                                                                     <input type="file" class="filepond"
@@ -199,7 +199,7 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="phone">Phone</label>
-                                                                            <input type="text"
+                                                                            <input type="number"
                                                                                 class="form-control mb-3" id="phone"
                                                                                 placeholder="Write your phone number here"
                                                                                 value="+1 (530) 555-12121">

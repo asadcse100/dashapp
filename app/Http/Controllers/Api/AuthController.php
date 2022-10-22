@@ -56,13 +56,13 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'username'=> $input['user_name'],
             'phone' => $input ['phone'],
-            'refer' => $input['refer']
+            'refer' => $input['refer'],
         ], 201);
     }
 
     public function login(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->orWhere('phone', $request->email)->first();
 
         if ($user != null) {
             if (Hash::check($request->password, $user->password)) {
@@ -106,7 +106,8 @@ class AuthController extends Controller
             'email' => $user->email,
             'phone' => $user->phone,
             'username' => $user->user_name,
-            'refer' => $user->refer
+            'refer' => $user->refer,
+            'photo' => $user->photo
         ]);
     }
 

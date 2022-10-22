@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-header">
+                        <div class="">
                             <h2 class="text-dark h6 fw-600 mb-0">{{ translate('Send Project Cancel Request') }}</h2>
                         </div>
                         <div class="card-body">

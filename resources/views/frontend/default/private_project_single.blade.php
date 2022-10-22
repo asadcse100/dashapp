@@ -139,7 +139,6 @@
 
                             <!-- Content -->
                             <div class="card-body pt-1 px-5 pb-5">
-
                                 <a href="{{ route('client.details', $project->client->user_name) }}"
                                     class="d-flex align-items-center py-4 text-dark">
                                     <span class="u-avatar u-avatar--bordered rounded-circle">

@@ -125,4 +125,9 @@ class User extends UserAuthenticatable implements Authenticatable
     {
         return $this->hasMany(ServicePackagePayment::class);
     }
+
+    public function ProfessionalType()
+    {
+        return $this->hasMany(ProfessionalType::class, 'id', 'professional_type_id');
+    }
 }

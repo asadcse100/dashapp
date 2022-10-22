@@ -84,11 +84,23 @@
                             <form class="form-horizontal" action="{{ route('skills.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="col-sm-12 mb-4">
                                     <div class="input-group input-group-sm mb-3">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Professional Types</span>
+
+                                        <select name="profe_id" class="from-select">
+                                            @foreach ($category as $profe_id)
+                                                <option value="{{ $profe_id->id }}">{{ $profe_id->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mb-4">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Skill Name</span>
                                         <input type="text" id="name" name="name"
-                                            placeholder="{{ translate('Eg. wordpress') }}" class="form-control" required>
+                                            placeholder="{{ translate('Eg. skill') }}" class="form-control" required>
                                     </div>
                                 </div>
 
